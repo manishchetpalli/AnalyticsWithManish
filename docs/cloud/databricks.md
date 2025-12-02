@@ -232,55 +232,7 @@ Databricks is composed of several main components that work together to provide 
 
 **-------------------------------------------------------------------------------------------------------------**
 
-### **What is Governance and Unity Catalog?**
 
-Governance Defined: In the context of data, governance means ensuring your data is secure, available, and accurate. Unity Catalog is the feature in Databricks that provides this capability.
-
-Unified Governance: Unity Catalog offers a "unified" governance model, which means you "define it once and secure it everywhere". This is a key benefit, making it a popular feature in Databricks.
-
-Centralized Management:
-    Without Unity Catalog, each Databricks workspace must be managed individually, including its users, metastore, and compute resources.
-    With Unity Catalog, you get centralized governance, allowing you to manage all your workspaces from a single, account-level location. This simplifies administration, as you can manage users and metastores at the account level and then assign them to specific workspaces.
-
-Key Features: Unity Catalog is a centralized, open-source solution that provides security, auditing, data lineage, and data discovery capabilities. Because it's open source, the code is publicly available on GitHub.
-
-**The Unity Catalog Object Model**
-
-![Steps](unitycatalog.svg)
-
-Unity Catalog organizes data and non-data assets in a hierarchical object model.
-
-1. Metastore:
-    This is the top-level object in the hierarchy. It is responsible for storing metadata.
-    Metadata is "data about data," which includes information like data schemas, Access Control Lists (ACLs), and user permissions.
-    The metadata itself is stored in the Databricks control plane, while the actual data is stored in a location you define in your own cloud account's data plane (e.g., an Azure storage account).
-    Best Practice: It is highly recommended to have only one metastore per region.
-
-2. Securable Objects: Below the metastore, the objects are divided into two main types:
-
-    Data Securable Objects: These objects, starting with the Catalog, deal directly with your data assets.
-
-    Non-Data Securable Objects: These objects support your data assets and include things like storage credentials, external locations, shares, and connections.
-
-**Data Securable Objects Hierarchy**
-
-Catalog: This is the primary object for managing your data assets, whether they are structured, semi-structured, or unstructured. All securable data assets are organized under a catalog.
-
-Schema: Within a catalog, you can define schemas to further organize your data assets.
-
-Tables and Views: Used to maintain your structured data within a schema.
-
-Volumes:
-    Volumes are essentially file systems that can be used to manage and govern structured, unstructured, or semi-structured data.
-    Any files stored in a volume can have their permissions managed directly through Unity Catalog.
-
-Functions and ML Models: You can also create and govern user-defined functions and machine learning models within Unity Catalog, managing their permissions centrally.
-
-**The Three-Level Namespace**
-
-A key concept introduced with Unity Catalog is the three-level namespace for accessing data.
-To access a table or view, you must specify its full path using the format: catalog_name.schema_name.table_name.
-Example: If you have a table named sales under a schema named bronze in a catalog named dev, you would access it using dev.bronze.sales. This structure ensures data is securely accessed based on its specific catalog and schema location.
 
 
 

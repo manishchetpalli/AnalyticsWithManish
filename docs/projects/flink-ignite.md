@@ -3,6 +3,9 @@ This project draws inspiration from this Medium article:
 
 A custom Apache Flink JDBC dialect implementation for Apache Ignite, enabling seamless integration between Flink and Ignite via the JDBC connector. This dialect allows Flink to read from and write to Apache Ignite tables using SQL and the Table API.
 
+
+
+
 ### **Features**
 - Custom `JdbcDialect` for Apache Ignite
 - Supports upsert (MERGE) statements for idempotent writes

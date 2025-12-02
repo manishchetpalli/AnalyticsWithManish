@@ -1,6 +1,8 @@
 Cloud data architecture, by design, handles the ingestion, transformation, and analysis of data that is too large or complex for traditional data architectures.
 
 
+![Steps](pgda.svg)
+
 ## **Patterns of Good Cloud Data Architecture**
 
 Let's learn about 5 principles for cloud-native data architecture that are useful for designing and operating reliable, cost-effective and efficient systems in the cloud.

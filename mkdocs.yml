@@ -65,6 +65,10 @@ nav:
       - Data Orchestration: airflow/dataorchestration.md
       - File Formats: DataEngineering/fileformat.md
       - SQL: sql/sql.md
+  - Projects:
+    - Flight Booking Data Pipeline: projects/FlightBookingDataPipelinewithAirflow&CICD.md
+    - Flink Ignite Custom Dialect: projects/flink-ignite.md
+    - FastAPI Kafka Producer: projects/kafkaapi.md
   - BigData:  
       - Overview: hadoop/Bigdata.md
       - HDFS:  hadoop/HDFS.md
@@ -123,6 +127,16 @@ nav:
     - Overview: cloud/overview.md
     - Databricks:
       - Overview: cloud/databricks.md
+      - Unity Catalog: cloud/unitycatalog.md
+  - System Design:
+    - Overview: systemdesign/overview.md
+    - Horizonatal vs Vertical Scaling: systemdesign/scaling.md
+  - SetupDocs:
+    - Airflow Setup: tooling/airflow_install_onpremise.md
+    - Ignite Multi Node Setup: tooling/igniteinstall.md
+    - Kafka Multi Node Setup: tooling/kafka_install_zookeeper.md
+    - Kubernetes Setup: tooling/kubernetes_install.md
+    - Sparkstandalone Multi Node Setup: tooling/spark3standalone.md
   - Interview Prep:
     - Hadoop : hadoop/hadoopiq.md
     - Hadoop Scenario based: hadoop/hadoopscenarios.md

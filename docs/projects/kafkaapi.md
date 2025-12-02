@@ -2,10 +2,11 @@
 
 
 
-A production-ready **FastAPI-based REST API** for publishing JSON messages to **Apache Kafka** topics. Designed for high availability, containerized with Docker, and includes Prometheus metrics support for observability.
+A **FastAPI-based REST API** for publishing JSON messages to **Apache Kafka** topics. Designed for high availability, containerized with Docker, and includes Prometheus metrics support for observability.
 
 
-![Steps](fastapi.svg)
+
+![Steps](FastAPI.svg)
 
 ## **Features**
 
@@ -17,7 +18,7 @@ A production-ready **FastAPI-based REST API** for publishing JSON messages to **
 
 !!! Tip "Tip"
     
-    For better understanding, you should clone the repo `fastapipythonkafka`
+    For better understanding, clone the repo `fastapipythonkafka`
     ```bash
     git clone https://github.com/manish-chet/fastapipythonkafka
     ```
@@ -80,7 +81,7 @@ curl -X POST \
 
     500: Internal server error
 
-## **Screenshots of local deployment**
+## **Local deployment**
 
 
 ![Steps](docker.svg)
