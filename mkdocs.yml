@@ -59,9 +59,9 @@ nav:
   - Home: index.md
   - Fundamentals:
       - Overview: DataEngineering/DE.md
-      - Data Engineering Lifecycle: DataEngineering/DEcycle.md
-      - Data Engineering UnderCurrents: DataEngineering/DEundercurrent.md
-      - Data Architecture & Design: DataEngineering/DesigningGDA.md
+      - DE Lifecycle: DataEngineering/DEcycle.md
+      - DE UnderCurrents: DataEngineering/DEundercurrent.md
+      - DE Architecture & Design: DataEngineering/DesigningGDA.md
       - Data Orchestration: airflow/dataorchestration.md
       - File Formats: DataEngineering/fileformat.md
       - SQL: sql/sql.md
@@ -82,11 +82,6 @@ nav:
         - Joins: hive/join.md
       - Kafka: 
         - Overview: kafka/overview.md
-        - Architecture: kafka/architecture.md
-        - Role of Zookeeper: kafka/zookeeper.md
-        - Partitions & Replciations: kafka/partition.md
-        - Offsets: kafka/offsets.md
-        - Log segments: kafka/logsegments.md
         - Producers: kafka/producer.md
         - Handling Producer Failures: kafka/failures.md
         - Consumers: kafka/consumer.md
@@ -108,6 +103,7 @@ nav:
         - Dynamic resource allocation & partition pruning: spark/dynamic.md
         - Salting: spark/salting.md
         - Best practices to design Spark application: spark/bp.md
+        - HackerRank Basic Select: spark/basicselect.ipynb
       - Mongo: sql/Mongo.md
       - Delta Lake: delta/deltalake.md
   - DevOps:
@@ -131,6 +127,9 @@ nav:
   - System Design:
     - Overview: systemdesign/overview.md
     - Horizonatal vs Vertical Scaling: systemdesign/scaling.md
+    - Load Balancing: systemdesign/loadbalancing.md
+    - Consistent Hashing: systemdesign/consistenthashing.md
+    - Messaging Queue: systemdesign/messagingqueue.md
   - SetupDocs:
     - Airflow Setup: tooling/airflow_install_onpremise.md
     - Ignite Multi Node Setup: tooling/igniteinstall.md
@@ -192,9 +191,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/manish-chet
 
-# plugins:
-#   - mkdocs-jupyter:
-#       include_source: true
-#       execute: false
+plugins:
+  - mkdocs-jupyter:
+      include_source: true
+      execute: false
 extra_css:
   - stylesheets/extra.css

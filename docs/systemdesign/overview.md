@@ -2,7 +2,7 @@
 
 When opening a new restaurant the initial challenge arises when one chef cannot handle all the orders from new customers.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 
 ### **Scaling the Resource: Vertical Scaling and Optimization**
@@ -15,7 +15,7 @@ The goal is to optimize processes and increase throughput using the same resourc
    
    ***Non-Peak Hours***: Pre-preparation should happen during non-peak hours. Doing this around 4:00 AM is good because there won't surely be any pizza orders, preventing the chef from being busy making pizza bases when a regular order comes in.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Ensuring Resilience: Avoiding Single Points of Failure**
 
@@ -27,7 +27,7 @@ The initial single-chef setup is not resilient.
    
    ***Master-Slave Architecture***: Keeping backups and avoiding SPOFs maps, for computers, to a master-slave architecture. Hiring a backup significantly reduces the chance of losing business.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Expanding Capacity: Horizontal Scaling**
 
@@ -37,7 +37,7 @@ If the business continues to grow, more resources must be added.
    
    ***Horizontal Scaling***: This process maps to horizontal scaling, which involves buying more machines of similar types to get more work done.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 ### **Specialization and Microservices Architecture**
 
 When multiple resources are available, efficiency is achieved through specialization.
@@ -50,7 +50,7 @@ When multiple resources are available, efficiency is achieved through specializa
    
    ***Microservice Architecture***: Creating specialist teams (e.g., scaling the pizza team differently than the garlic bread team) and dividing responsibilities is known as microservice architecture. In this architecture, responsibilities are well-defined and stay within the business use case. This structure makes the business highly scalable as specialists can be scaled easily.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Geographical Distribution and Fault Tolerance**
 
@@ -62,7 +62,7 @@ Even a successful, scalable pizza shop (a single location) is vulnerable to loca
    
    ***Quicker Response Times***: A clear advantage of distribution is that orders local to a specific shop's range can be served by that shop, leading to quicker response times. Large distributed systems like Facebook use local servers worldwide for this reason. Distribution makes the system more fault tolerant.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 ### **Intelligent Routing: Load Balancing**
 
 When multiple shops exist, a decision must be made about where to send a customer's request.
@@ -75,7 +75,7 @@ When multiple shops exist, a decision must be made about where to send a custome
    
    ***Load Balancer***: The mechanism that routes requests in a smart way is called a load balancer.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 ### **Flexibility and Extensibility: Decoupling**
 
 To make the system flexible to change, responsibilities must be separated.
@@ -88,7 +88,7 @@ To make the system flexible to change, responsibilities must be separated.
    
    ***Extensibility***: Decoupling ensures the system remains extensible. For example, the delivery agent service doesn't need to know if it is delivering a pizza or a burger. This ability to decouple allows businesses (like Amazon) to scale out their offerings.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 ### **High Level vs. Low Level System Design**
 
 The process of finding technical solutions by mapping them from a business scenario is integral to system design.

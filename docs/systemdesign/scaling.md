@@ -14,7 +14,7 @@
    
    ***Reliability and Cloud Hosting***: To ensure the service does not go down (e.g., due to power loss or someone pulling the plug), the service should be hosted on the cloud.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 ### **Understanding the Cloud**
 
    The cloud is fundamentally a set of computers that a provider (like Amazon Web Services - AWS, the most popular example) offers for money.
@@ -25,7 +25,7 @@
    
    Using the cloud allows the developer to focus on business requirements because the cloud solution providers handle the configuration, settings, and reliability to a large extent.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **The Need for Scalability**
 
@@ -38,7 +38,7 @@ Two Solutions for Scaling:
    1.  Buy a bigger machine.
    2.  Buy more machines.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Mechanisms of Scaling**
 
@@ -53,7 +53,7 @@ The two scaling solutions correspond to two key mechanisms:
 
    Requests are distributed randomly among multiple machines. To process more requests overall because there are more resources available. The system is resilient; if one machine fails, requests can be redirected to the other machines.This scales well; the number of servers thrown at the problem scales almost linearly with the number of users added, overcoming hardware limitations inherent in vertical scaling.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Detailed Comparison of Vertical vs. Horizontal Scaling**
 
@@ -65,7 +65,7 @@ The two scaling solutions correspond to two key mechanisms:
 | Data Consistency | Real Issue: Difficult to maintain complex data integrity (e.g., atomic transactions may require impractical locking of all servers/databases). Requires some form of loose transactional guarantee. | Consistent: All data resides on a single system. |
 | Hardware Limits | Scales well: The amount of servers can be increased almost linearly. | Limited: Subject to hardware limitations; the computer cannot be made infinitely big.
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Real-World Approach and System Design Trade-offs**
 
@@ -80,8 +80,12 @@ The two scaling solutions correspond to two key mechanisms:
    System design is the process of making trade-offs to build a system that meets requirements, focusing primarily on scalability, resilience, and consistency.
 
 
-*-------------------------------------------------------------------------------------------------------------------------------------------------------------*
+---
 
 ### **Analogy**
 
-Thinking about scaling a computer system is like managing a pizza kitchen. Vertical scaling is buying a single, massive, state-of-the-art oven—it cooks pizzas incredibly fast and keeps all your ingredients in one place (consistent data), but if the oven breaks, you can't make any pizza (single point of failure). Horizontal scaling is buying many smaller, cheaper ovens—if one oven breaks, the others keep cooking (resilience), and you can add new ovens indefinitely as demand grows, but coordinating the ingredients and timing across all those separate ovens (data consistency and network communication) becomes much harder. The best solution is often a hybrid: buying several very large, high-quality ovens (horizontal scaling of highly vertically scaled nodes).
+Thinking about scaling a computer system is like managing a pizza kitchen. Vertical scaling is buying a single, massive, state-of-the-art oven—it cooks pizzas incredibly fast and keeps all your ingredients in one place (consistent data), but if the oven breaks, you can't make any pizza (single point of failure). 
+
+Horizontal scaling is buying many smaller, cheaper ovens—if one oven breaks, the others keep cooking (resilience), and you can add new ovens indefinitely as demand grows, but coordinating the ingredients and timing across all those separate ovens (data consistency and network communication) becomes much harder. 
+
+The best solution is often a hybrid: buying several very large, high-quality ovens (horizontal scaling of highly vertically scaled nodes).

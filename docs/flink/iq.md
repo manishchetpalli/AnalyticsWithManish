@@ -1,6 +1,6 @@
 # FLINK_IQ
 
-!!!- info "1. See you using Flink, briefly introduce Flink?"
+!!!- info "1. Briefly introduce Flink?"
     Apache Flink is an open-source stream processing and batch processing framework designed for big data processing and analytics. It provides fault tolerance, high throughput, and low-latency processing of large-scale data streams
 
 !!!- info "2. What are the differences between Flink and Spark Streaming?"
@@ -11,7 +11,7 @@
     4. In the case of out-of-order data, Flink is stronger than spark, because flink has watermark. In fact, the calculation method when running is the time of the last data-if watermaker is greater than the end of the window, execute
     5. For fault tolerance, flink is also better than spark. For example, flink supports two-stage transactions to ensure that data after program crashes will not be re-consumed. Spark also has checkpoints, but it only ensures that data is not lost, and it cannot be repeated. consumption.
 
-
+    
 !!!- info "3. What are the roles of Flink cluster? What are the functions?"
     Flink programs mainly have three roles: TaskManager, JobManager, and Client when they are running.
 

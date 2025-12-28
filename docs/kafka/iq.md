@@ -1,32 +1,5 @@
 # KAFKA_IQ
 
-!!!- info "1. What is Apache Kafka?"
-    Apache Kafka is a publish-subscribe open source message broker application. This messaging application was coded in "Scala". Basically, this project was started by the Apache software. Kafka's design pattern is mainly based on the transactional logs design.
-
-!!!- info "2. Enlist the several components in Kafka"
-    The most important elements of Kafka are:
-    - **Topic** – Kafka Topic is the bunch or a collection of messages.
-    - **Producer** – In Kafka, Producers issue communications as well as publishes messages to a Kafka topic.
-    - **Consumer** – Kafka Consumers subscribes to a topic(s) and also reads and processes messages from the topic(s).
-    - **Brokers** –While it comes to manage storage of messages in the topic(s) we use Kafka Brokers.
-
-!!!- info "3. Explain the role of the offset"
-    There is a sequential ID number given to the messages in the partitions what we call, an offset. So, to identify each message in the partition uniquely, we use these offsets.
-
-!!!- info "4. What is a Consumer Group?"
-    The concept of Consumer Groups is exclusive to Apache Kafka. Basically, every kafka cosumer group consists of one or more consumers that jointly consume a set of subscribed topics
-
-!!!- info "5. What is the role of the ZooKeeper in Kafka?"
-    Apache Kafka is a distributed system is built to use Zookeeper. Although, Zookeeper's main role here is to build coordination between different nodes in a cluster. However, we also use Zookeeper to recover from previously committed offset if any node fails because it works as periodically commit offset.
-
-!!!- info "6. Why is Kafka technology significant to use?"
-    There are some advantages of Kafka, which makes it significant to use:
-    - **High-throughput** : We do not need any large hardware in Kafka, because it is capable of handling high-velocity and high-volume data. Moreover, it can also support message throughput of thousands of messages per second.
-    - **Low Latency** : Kafka can easily handle these messages with the very low latency of the range of milliseconds, demanded by most of the new use cases.
-    - **Fault-Tolerant** : Kafka is resistant to node/machine failure within a cluster.
-    - **Durability** : As Kafka supports messages replication, so, messages are never lost. It is one of the reasons behind durability.
-    - **Scalability** : Kafka can be scaled-out, without incurring any downtime on the fly by adding additional nodes.
-
 !!!- info "7. What are consumers or users?"
     Kafka Consumer subscribes to a topic(s), and also reads and processes messages from the topic(s). Moreover, with a consumer group name, Consumers label themselves. In other words, within each subscribing consumer group, each record published to a topic is delivered to one consumer instance. Make sure it is possible that Consumer instances can be in separate processes or on separate machines.
 
@@ -36,16 +9,8 @@
 !!!- info "9. What roles do Replicas and the ISR play?"
     Basically, a list of nodes that replicate the log is Replicas. Especially, for a particular partition. However, they are irrespective of whether they play the role of the Leader. In addition, ISR refers to In-Sync Replicas. On defining ISR, it is a set of message replicas that are synced to the leaders.
 
-!!!- info "10. Why are Replications critical in Kafka?"
-    Because of Replication, we can be sure that published messages are not lost and can be consumed in the event of any machine error, program error or frequent software upgrades.
-
 !!!- info "11. In the Producer, when does QueueFullException occur?"
     Whenever the Kafka Producer attempts to send messages at a pace that the Broker cannot handle at that time QueueFullException typically occurs. However, to collaboratively handle the increased load, users will need to add enough brokers(servers, nodes), since the Producer doesn't block.
-
-!!!- info "12. What are the types of traditional method of message transfer?"
-    Basically, there are two methods of the traditional message transfer method, such as:
-    - **Queuing**: It is a method in which a pool of consumers may read a message from the server and each message goes to one of them.
-    - **Publish-Subscribe**: Whereas in Publish-Subscribe, messages are broadcasted to all consumers.
 
 !!!- info "13. What is Geo-Replication in Kafka?"
     For our cluster, Kafka MirrorMaker offers geo-replication. Basically, messages are replicated across multiple data centers or cloud regions, with MirrorMaker. So, it can be used in active/passive scenarios for backup and recovery; or also to place data closer to our users, or support data locality requirements.
@@ -76,18 +41,12 @@
     - **Replayability**: Kafka stores data for a configurable period, enabling applications to replay historical data. This is valuable for new applications that need access to historical data or for recovering from errors by reprocessing data.
     - **High Availability**: Kafka's distributed nature and replication model ensure high availability. Even if some brokers or partitions become unavailable, the system can continue to function, ensuring continuous operation of critical applications.
 
-!!!- info "17. What is the meaning of broker in Apache Kafka?"
-    A broker refers to a server in the Kafka cluster that stores and manages the data. Each broker holds a set of topic partitions, allowing Kafka to efficiently handle large volumes of data by distributing the load across multiple brokers in the cluster. Brokers handle all read and write requests from Kafka producers and consumers and ensure data replication and fault tolerance to prevent data loss.
-
 !!!- info "18. What is the maximum size of a message that kafka can receive?"
     The maximum size of a message that Kafka can receive is determined by the message.max.bytes configuration parameter for the broker and the max.message.bytes parameter for the topic. By default, Kafka allows messages up to 1 MB (1,048,576 bytes) in size, but both parameters can be adjusted to allow larger messages if needed.
 
 !!!- info "19. What is the Zookeeper's role in Kafka's ecosystem and can we use Kafka without Zookeeper?"
     Zookeeper in Kafka is used for managing and coordinating Kafka brokers. It helps in leader election for partitions, cluster membership, and configuration management among other tasks. Historically, Kafka required Zookeeper to function.
     However, with the introduction of KRaft mode (Kafka Raft Metadata mode), it's possible to use Kafka without Zookeeper. KRaft mode replaces Zookeeper by using a built-in consensus mechanism for managing cluster metadata, simplifying the architecture and potentially improving performance and scalability.
-
-!!!- info "20. How are messages consumed by a consumer in apache Kafka?"
-    In Apache Kafka, messages are consumed by a consumer through a pull-based model. The consumer subscribes to one or more topics and polls the Kafka broker at regular intervals to fetch new messages. Messages are consumed in the order they are stored in the topic's partitions. Each consumer keeps track of its offset in each partition, which is the position of the next message to be consumed, allowing it to pick up where it left off across restarts or failures.
 
 !!!- info "21. How can you improve the throughput of a remote consumer?"
     - Increase Bandwidth: Ensure the network connection has sufficient bandwidth to handle the data being consumed.
@@ -135,21 +94,11 @@
     SimpleConsumer class, you will notice it fetches MultiFetchResponse objects that include offsets as a list. In addition to that, when you iterate the Kafka Message, you will have MessageAndOffset objects that include both, the offset and the message sent.
     Yes, it is possible to get the message offset after producing a message in Kafka. When you send a message to a Kafka topic, the producer API can return metadata about the message, including the offset of the message in the topic partition
 
-!!!- info "29. What is the role of the offset in kafka?"
-    In Kafka, the offset is a unique identifier for each record within a Kafka topic's partition. It denotes the position of a record within the partition. The offset is used by consumers to track which records have been read and which haven't, allowing for fault-tolerant and scalable message consumption. Essentially, it enables consumers to pick up reading from the exact point they left off, even in the event of a failure or restart, thereby ensuring that no messages are lost or read multiple times.
 
 !!!- info "30. Can you explain the concept of leader and follower in kafka ecosystem?"
     In Apache Kafka, the concepts of "leader" and "follower" refer to roles that brokers play within a Kafka cluster to manage partitions of a topic.
     - **Leader**: For each partition of a topic, there is one broker that acts as the leader. The leader is responsible for handling all read and write requests for that partition. When messages are produced to a partition, they are sent to the leader broker, which then writes the messages to its local storage. The leader broker ensures that messages are stored in the order they are received.
     - **Follower**: Followers are other brokers in the cluster that replicate the data of the leader for fault tolerance. Each follower continuously pulls messages from the leader to stay up-to-date, ensuring that it has an exact copy of the leader's data. In case the leader broker fails, one of the followers can be elected as the new leader, ensuring high availability.
-
-!!!- info "31. What do you mean by zookeeper in Kafka and what are its uses?"
-    Apache ZooKeeper is a naming registry for distributed applications as well as a distributed, open-source configuration and synchronization service. It keeps track of the Kafka cluster nodes' status, as well as Kafka topics, partitions, and so on.
-    ZooKeeper is used by Kafka brokers to maintain and coordinate the Kafka cluster. When the topology of the Kafka cluster changes, such as when brokers and topics are added or removed, ZooKeeper notifies all nodes. When a new broker enters the cluster, for example, ZooKeeper notifies the cluster, as well as when a broker fails. ZooKeeper also allows brokers and topic partition pairs to elect leaders, allowing them to select which broker will be the leader for a given partition (and server read and write operations from producers and consumers), as well as which brokers contain clones of the same data. When the cluster of brokers receives a notification from ZooKeeper, they immediately begin to coordinate with one another and elect any new partition leaders that are required. This safeguards against the unexpected absence of a broker.
-
-!!!- info "32. What do you mean by a Partition in Kafka?"
-    Kafka topics are separated into partitions, each of which contains records in a fixed order. A unique offset is assigned and attributed to each record in a partition. Multiple partition logs can be found in a single topic. This allows several users to read from the same topic at the same time. Topics can be parallelized via partitions, which split data into a single topic among numerous brokers.
-    Replication in Kafka is done at the partition level. A replica is the redundant element of a topic partition. Each partition often contains one or more replicas, which means that partitions contain messages that are duplicated across many Kafka brokers in the cluster. One server serves as the leader of each partition (replica), while the others function as followers. The leader replica is in charge of all read-write requests for the partition, while the followers replicate the leader. If the lead server goes down, one of the followers takes over as the leader. To disperse the burden, we should aim for a good balance of leaders, with each broker leading an equal number of partitions.
 
 !!!- info "33. What do you mean by Kafka schema registry?"
     A Schema Registry is present for both producers and consumers in a Kafka cluster, and it holds Avro schemas. For easy serialization and de-serialization, Avro schemas enable the configuration of compatibility parameters between producers and consumers. The Kafka Schema Registry is used to ensure that the schema used by the consumer and the schema used by the producer are identical. The producers just need to submit the schema ID and not the whole schema when using the Confluent schema registry in Kafka. The consumer looks up the matching schema in the Schema Registry using the schema ID.
@@ -166,7 +115,7 @@
 
 !!!- info "36. Describe message compression in Kafka. What is the need of message compression in Kafka? Also mention if there are any disadvantages of it."
     Producers transmit data to brokers in JSON format in Kafka. The JSON format stores data in string form, which can result in several duplicate records being stored in the Kafka topic. As a result, the amount of disc space used increases. As a result, before delivering messages to Kafka, compression or delaying of data is performed to save disk space. Because message compression is performed on the producer side, no changes to the consumer or broker setup are required.
-    
+
     **Advantages:**
     - It decreases the latency of messages transmitted to Kafka by reducing their size.
     - Producers can send more net messages to the broker with less bandwidth.
@@ -180,7 +129,7 @@
 
 !!!- info "37. What do you understand about log compaction and quotas in Kafka?"
     Log compaction is a way through which Kafka assures that for each topic partition, at least the last known value for each message key within the log of data is kept. This allows for the restoration of state following an application crash or a system failure. During any operational maintenance, it allows refreshing caches after an application restarts. Any consumer processing the log from the beginning will be able to see at least the final state of all records in the order in which they were written, because of the log compaction.
-    
+
     A Kafka cluster can apply quotas on producers and fetch requests as of Kafka 0.9. Quotas are byte-rate limits that are set for each client-id. A client-id is a logical identifier for a request-making application. A single client-id can therefore link to numerous producers and client instances. The quota will be applied to them all as a single unit. Quotas prevent a single application from monopolizing broker resources and causing network saturation by consuming extremely large amounts of data.
 
 !!!- info "38. What do you mean by an unbalanced cluster in Kafka? How can you balance it?"
@@ -205,7 +154,7 @@
 
 !!!- info "41. What is meant by the Replication Tool?"
     The Replication Tool in Kafka is used for a high-level design to maintain Kafka replicas. Some of the replication tools available are
-    
+
     - **Preferred Replica Leader Election Tool**: Partitions are distributed to multiple brokers in a cluster, each copy known as a replica. The preferred replica usually refers to the leader. The brokers distribute the leader role evenly across the cluster for various partitions. Still, an imbalance can occur over time due to failures, planned shutdowns, etc. in such cases, you can use the replication tool to maintain the load balancing by reassigning the preferred replicas and hence, the leaders.
     - **Topics tool**: Kafka topics tool is responsible for handling all management operations related to topics, which include Listing and describing topics, Creating topics, Changing topics, Adding partitions to a topic, Deleting topics
     - **Reassign partitions tool**: This tool changes the replicas assigned to a partition. This means adding or removing followers associated with a partition.
@@ -214,7 +163,7 @@
 
 !!!- info "42. How can Kafka be tuned for optimal performance?"
     Tuning for optimal performance involves consideration of two key measures: latency measures, which denote the amount of time taken to process one event, and throughput measures, which refer to how many events can be processed in a specific time. Most systems are optimized for either latency or throughput, while Kafka can balance both.
-    
+
     Tuning Kafka for optimal performance involves the following steps:
     - **Tuning Kafka producers**: Data that the producers have to send to brokers is stored in a batch. When the batch is ready, the producer sends it to the broker. For latency and throughput, to tune the producers, two parameters must be taken care of: batch size and linger time. The batch size has to be selected very carefully. If the producer is sending messages all the time, a larger batch size is preferable to maximize throughput. However, if the batch size is chosen to be very large, then it may never get full or take a long time to fill up and, in turn, affect the latency. Batch size will have to be determined, taking into account the nature of the volume of messages sent from the producer. The linger time is added to create a delay to wait for more records to get filled up in the batch so that larger records are sent. A longer linger time will allow more messages to be sent in one batch, but this could compromise latency. On the other hand, a shorter linger time will result in fewer messages getting sent faster - reduced latency but reduced throughput as well.
     - **Tuning Kafka broker**: Each partition in a topic is associated with a leader, which will further have 0 or more followers. It is important that the leaders are balanced properly and ensure that some nodes are not overworked compared to others.
@@ -228,7 +177,7 @@
       ```
       Which will give an output like:
       ```
-      WATCHER:: WatchedEvent state:SyncConnected type:None path:null [0, 1, 2, 3]
+     WATCHER:: WatchedEvent state:SyncConnected type:None path:null [0, 1, 2, 3]
       ```
       This indicates that there are four alive brokers - 0,1,2 and 3
     - **Using zkCli.sh**
@@ -245,21 +194,12 @@
 !!!- info "45. What is meant by Kafka Connect?"
     Kafka Connect is a tool provided by Apache Kafka to allow scalable and reliable streaming data to move between Kafka and other systems. It makes it easier to define connectors that are responsible for moving large collections of data in and out of Kafka. Kafka Connect is able to process entire databases as input. It can also collect metrics from application servers into Kafka topics so that this data can be available for Kafka stream processing.
 
-!!!- info "46. Explain message compression in Apache Kafka."
-    In Apache Kafka, producer applications write data to the brokers in JSON format. The data in the JSON format is stored in string form, which can result in several duplicated records getting stored in the Kafka topic. This leads to an increased occupation of disk space. Hence, to reduce this disk space, compression of messages or lingering the data is performed before sending the messages to Kafka. Message compression is done on the producer side, and hence there is no need to make any changes to the configuration of the consumer or the broker.
-
 !!!- info "47. What is the need for message compression in Apache Kafka?"
     Message compression in Kafka does not require any changes in the configuration of the broker or the consumer. It is beneficial for the following reasons:
     - Due to reduced size, it reduces the latency in which messages are sent to Kafka.
     - Reduced bandwidth allows the producers to send more net messages to the broker.
     - When the data is stored in Kafka via cloud platforms, it can reduce the cost in cases where the cloud services are paid.
     - Message compression leads to reduced disk load, which will lead to faster read and write requests.
-
-!!!- info "48. Define consumer lag in Apache Kafka."
-    Consumer lag refers to the lag between the Kafka producers and consumers. Consumer groups will have a lag if the data production rate far exceeds the rate at which the data is getting consumed. Consumer lag is the difference between the latest offset and the consumer offset.
-
-!!!- info "49. What do you know about log compaction in Kafka?"
-    Log compaction is a method by which Kafka ensures that at least the last known value for each message key within the log of data is retained for a single topic partition. This makes it possible to restore the state after an application crashes or in the event of a system failure. It allows cache reloading once an application restarts during any operational maintenance. Log compaction ensures that any consumer processing the log from the start can view the final state of all records in the original order they were written.
 
 !!!- info "50. When does Kafka throw a BufferExhaustedException?"
     BufferExhaustedException is thrown when the producer cannot allocate memory to a record due to the buffer being too full. The exception is thrown if the producer is in non-blocking mode and the rate of data production exceeds the rate at which data is sent from the buffer for long enough for the allocated buffer to be exhausted.
@@ -289,37 +229,6 @@
 
 !!!- info "55. What is meant by the Kafka schema registry?"
     For both the producers and consumers associated with a Kafka cluster, a Schema Registry is present, which stores Avro schemas. Avro schemas allow the configuration of compatibility settings between the producers and the consumers for seamless serialization and deserialization. Kafka Schema Registry is used to ensure that there is no difference in the schema that is being used by the consumer and the one that is being used by the producer. While using the Confluent schema registry in Kafka, the producers only need to send the schema ID and not the entire schema. The consumer uses the schema ID to look up the corresponding schema in the Schema Registry.
-
-!!!- info "56. Name the various types of Kafka producer API."
-    There are three types of Kafka producer API available:
-    - Fire and Forget
-    - Synchronous producer
-    - Asynchronous produce
-
-!!!- info "57. What is the ZooKeeper ensemble?"
-    ZooKeeper works as a coordination system for distributed systems and is a distributed system on its own. It follows a simple client-server model, where clients are the machines that make use of the service, and the servers are nodes that provide the service. The collection of ZooKeeper servers forms the ZooKeeper ensemble. Each ZooKeeper server is capable of handling a large number of clients.
-
-!!!- info "58. What are Znodes?"
-    Nodes in a ZooKeeper tree are referred to as znodes. Znodes maintain a structure that contains version numbers for data changes, acl changes, and also timestamps. The version number, along with the timestamp, allows ZooKeeper to validate the cache and ensure that updates are coordinated. The version number associated with Znode increases each time the znode's data changes.
-
-!!!- info "59. What are the types of Znodes?"
-    There are three types of Znodes, namely:
-    - **Persistence Znode**: these are the znodes that remain alive even after the client who created that particular znode is disconnected. All znodes are persistent by default unless otherwise specified.
-    - **Ephemeral Znode**: Ephemeral znodes remain active only until the client is alive. Ephemeral Znodes get deleted whenever the client that created them gets disconnected from the ZooKeeper ensemble. They play an important role in the leader election.
-    - **Sequential Znode**: when znodes are created, it is possible to request the ZooKeeper to add an increasing counter to the end of the path. This counter is unique to the parent znode. Sequential nodes may be persistent or ephemeral.
-
-!!!- info "60. How can we create Znodes?"
-    Znodes are created within the given path.
-    **Syntax:**
-    ```
-    create /path/data
-    ```
-    Flags can be used to specify whether the znode created will be persistent, ephemeral, or sequential.
-    ```
-    create -e /path/data   # creates an ephemeral znode.
-    create -s /path/data   # creates a sequential znode.
-    ```
-    All znodes are persistent by default.
 
 !!!- info "61. Suppose you are sending messages to a Kafka topic using kafkaTemplate. You come across a requirement that states that if a failure occurs while delivering messages to a Kafka topic, you must retry sending the messages on the same partition with the same offset. How can you achieve this using kafkatemplate?"
     If you give the key while delivering the message, it will be stored in the same partition regardless of how many times you send it. The hashed key is used by Kafka to decide which partition needs to be updated.
@@ -358,15 +267,6 @@
       `seek(topicPartition, offset)`.
     - The offset related to the message should be kept together with the processed message once it has been processed.
 
-!!!- info "66. Explain Kafka's message delivery semantics."
-    Kafka offers three message delivery semantics: At most once, At least once, and Exactly once, ensuring different trade-offs between message delivery and duplication.
-
-!!!- info "67. Explain the role of log segments in Kafka."
-    Log segments are files that store Kafka messages. They are immutable and are used to manage disk space by performing log segment rolling and deletion.
-
-!!!- info "68. What is the purpose of the offset in Kafka?"
-    The offset is a unique identifier of a record within a partition. It denotes the position of the consumer in the partition. Kafka maintains this offset per partition, per consumer group, allowing each consumer group to read from a different position in the partition. This enables Kafka to provide both queue and publish-subscribe messaging models.
-
 !!!- info "69. How would you secure a Kafka cluster?"
     Top candidates would use multiple layers of security and strategies such as:
     - SSL/TLS for encryption of data in transit
@@ -374,13 +274,6 @@
     - A Kerberos integration
     - Network policies for controlling access to the Kafka cluster
     - ACLs (Access Control Lists) for authorizing actions by users or groups on specific topics
-
-!!!- info "70. Explain the concept of Kafka MirrorMaker."
-    Kafka MirrorMaker is a tool used for cross-cluster data replication. It enables data mirroring between two Kafka clusters, which is particularly useful for disaster recovery and geo-replication scenarios.
-    MirrorMaker works by using consumer and producer configurations to pull data from a source cluster and push it to a destination cluster.
-
-!!!- info "71. What are ISR in Kafka?"
-    ISR (short for In-Sync Replicas) are replicas of a Kafka partition that are fully in sync with the leader. They're critical for ensuring data durability and consistency. If a leader fails, one of the ISRs can become the new leader.
 
 !!!- info "72. What authentication mechanisms can you use in Kafka?"
     Kafka supports:
@@ -417,7 +310,7 @@
 
 !!!- info "75. How does Kafka manage backpressure?"
     Kafka handles backpressure by controlling the flow of data between producers, brokers, and consumers through these mechanisms:
-    
+
     **Producer-Side:**
     - Buffering: Producers buffer records up to buffer.memory . If the buffer is full, the producer blocks or throws an exception (based on max.block.ms ).
     - Batching: Producers optimize sending data in batches ( batch.size ) to handle high-throughput workloads efficiently.
@@ -445,25 +338,6 @@
 
 !!!- info "79. What is a Data Log in Kafka?"
     As we know, messages are retained for a considerable amount of time in Kafka. Moreover, there is flexibility for consumers that they can read as per their convenience. Although, there is a possible case that if Kafka is configured to keep messages for 24 hours and possibly that time the consumer is down for a time greater than 24 hours, then the consumer may lose those messages. However, still, we can read those messages from the last known offset, but only at a condition that the downtime on part of the consumer is just 60 minutes. Moreover, on what consumers are reading from a topic Kafka doesn’t keep state.
-
-
-!!!- info "80. How can you ensure message delivery order across multiple Kafka partitions?"
-    Kafka doesn't guarantee message delivery order across partitions. However, you can use a single partition or key-based partitioning to maintain order within a partition.
-
-!!!- info "81. What is the role of a Kafka producer callback?"
-    A producer callback is invoked after a record is sent to Kafka. It allows for handling success or failure notifications.
-
-!!!- info "82. Explain the concept of message retention policies in Kafka."
-    Kafka provides two retention policies: log compaction and delete. Log compaction retains the latest message for each key, while delete retains messages based on time or size.
-
-!!!- info "83. How does Kafka handle partition rebalancing during a consumer group rebalance?"
-    Kafka follows a group coordination protocol, where the group coordinator orchestrates the partition assignment and rebalancing process during consumer group rebalances.
-
-!!!- info "84. How does Kafka handle message deduplication?"
-    Kafka provides idempotent producers, which assign a unique identifier (message key) to each message. By using the message key, Kafka can identify and filter out duplicate messages during processing.
-
-!!!- info "85. How does Kafka Streams handle state restoration after a failure?"
-    Kafka Streams leverages Kafka's built-in log compaction and changelog topics to persist and restore the state of stream processing applications. The application's state is continuously maintained and can be restored in case of failure.
 
 !!!- info "86. What are the considerations for scaling Kafka clusters and applications in a production environment?"
     Scaling Kafka clusters and applications involves considerations such as adding more brokers, increasing the number of partitions, optimizing hardware resources, and fine-tuning configuration parameters. Load balancing and monitoring tools are also essential for managing scalability effectively.
