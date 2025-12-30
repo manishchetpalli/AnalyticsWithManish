@@ -63,6 +63,7 @@ nav:
       - DE UnderCurrents: DataEngineering/DEundercurrent.md
       - DE Architecture & Design: DataEngineering/DesigningGDA.md
       - Data Orchestration: airflow/dataorchestration.md
+      - Data Warehousing: datawarehousing/overview.md
       - File Formats: DataEngineering/fileformat.md
       - SQL: sql/sql.md
   - Projects:
