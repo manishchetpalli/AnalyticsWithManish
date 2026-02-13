@@ -537,3 +537,7 @@ Dimension Table (customer_dim)
 | Type 4   |  Full                | History table |
 | Type 6   |  Full + Quick Access | Hybrid        |
 
+
+## **Types of Databases**
+
+![Types of Databases](tod.svg)

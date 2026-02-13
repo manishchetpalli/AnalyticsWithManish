@@ -1,4 +1,6 @@
-### **Data Lake Problems and the Delta Lake Solution**
+# Delta Lake
+
+## **Data Lake Problems and the Delta Lake Solution**
 
 Data lakes offered flexible data storage, allowing ingestion of structured, semi-structured, and unstructured data like audio, video, images, or logs, and storing this high volume data cheaply and scalably on services like S3 or ADLS.
 
@@ -6,23 +8,26 @@ However, data lakes presented severe challenges that Delta Lake was designed to 
 
 Traditional updates or deletes required reading all the data into memory, applying the changes, and writing it back; if the system failed during this process, it resulted in inconsistent or corrupt data. Delta Lake addresses these issues and provides additional features such as time travel, unified batch and streaming capabilities, schema evolution and enforcement, and audit history
 
-**-------------------------------------------------------------------------------------------------------------**
+---
 
-### **Delta Log Internals and Scaling**
-The Delta Log acts as the transaction layer on top of Parquet files, recording transactions atomically in JSON files (e.g., 0.json, 1.json). The current state of the table is calculated by "summing" all transaction logs, applying additions and removals to determine the set of active Parquet files. 
+## **Delta Log Internals and Scaling**
+
+The Delta Log acts as the transaction layer on top of Parquet files, recording transactions atomically in JSON files (e.g., 0.json, 1.json). The current state of the table is calculated by "summing" all transaction logs, applying additions and removals to determine the set of active Parquet files.
 
 ![DeltaLog](delta.svg)
 
 Delta Lake computes the latest state of a table by reading the Delta Log and performing a summation of all recorded transactions. This approach ensures data consistency and provides features like time travel.
 
-**Core Components of a Delta Table**
+> --- ***Core Components of a Delta Table***
 
 A Delta Lake table is composed of two main elements
 
  1. Data Files (Parquet): The actual data is stored in immutable Parquet files.
  2. Transaction Layer (Delta Log): A transaction layer, called the Delta Log, resides on top of the data files. This log records every operation performed on the table.
 
-**The Delta Log and Transaction Recording**
+> --- **The Delta Log and Transaction Recording**
+
+Deltalog jason file containes - {commitinfo,metadata,protocol,operationperformed}
 
 Each transaction or operation (such as an insert, update, or delete) on a Delta table is treated as an atomic unit of work.
 

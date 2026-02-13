@@ -1,4 +1,4 @@
-site_name: Data Engineering Notes
+site_name: ManishKumar Chetpalli
 site_description: Documentation for Data Engineering and Big Data Technologies
 site_author: Manishkumar Chetpalli
 
@@ -81,50 +81,16 @@ nav:
         - SerDe: hive/serde.md
         - Partitioning & bucketing: hive/partition.md
         - Joins: hive/join.md
-      - Kafka: 
-        - Overview: kafka/overview.md
-        - Producers: kafka/producer.md
-        - Handling Producer Failures: kafka/failures.md
-        - Consumers: kafka/consumer.md
-        - Index & Timeindex: kafka/time.md
-        - Unclean Leader Election & Availability vs Durability Trade-Off: kafka/trade.md
+      - Kafka: kafka/overview.md
       - Ignite: ignite/ignite.md
       - Airflow: airflow/airflow.md
-      - Spark: 
-        - Overview & Architecture: spark/overview.md
-        - DAG, Transformations & Actions: spark/sparktrans.md
-        - SparkQuery Plan: spark/sparksqlengine.md
-        - Resilient Distributed Datasets: spark/Rdd.md
-        - SparkSession vs SparkContext: spark/context.md
-        - Repartition vs Coalesce: spark/repart.md
-        - Memory management: spark/sparkmemory.md
-        - Spark-Submit & Deployment modes: spark/sparksubmit.md
-        - Adaptive Query Execution: spark/adaptive.md
-        - Caching & Persist: spark/cacheandpersist.md
-        - Dynamic resource allocation & partition pruning: spark/dynamic.md
-        - Salting: spark/salting.md
-        - Best practices to design Spark application: spark/bp.md
-        - HackerRank Basic Select: spark/basicselect.ipynb
+      - Spark: spark/spark.md
       - Mongo: sql/Mongo.md
       - Delta Lake: delta/deltalake.md
-  - DevOps:
-      - Git: devops/git.md
-      - Docker: devops/docker.md
-      - Kubernetes:
-        - Architecture: devops/kubernetesarchitecture.md
-        - Architecture: devops/kubernetesarchitecture.md
-        - Labels, Selectors, and Replication Controllers: devops/kube2.md
-        - Jobs, init container and pod lifecycle: devops/kube3.md
-        - Deploying object: devops/kube4.md
-        - Networking: devops/kube5.md
-        - Persistent Volumes & Liveness Probes: devops/kube6.md
-        - Namespaces & Resource Quotas: devops/kube7.md
-        - Horizontal Pod Autoscaling: devops/kube8.md
   - Cloud computing:
     - Overview: cloud/overview.md
     - Databricks:
       - Overview: cloud/databricks.md
-      - Unity Catalog: cloud/unitycatalog.md
   - System Design:
     - Overview: systemdesign/overview.md
     - Horizonatal vs Vertical Scaling: systemdesign/scaling.md
@@ -192,9 +158,5 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/manish-chet
 
-plugins:
-  - mkdocs-jupyter:
-      include_source: true
-      execute: false
 extra_css:
   - stylesheets/extra.css

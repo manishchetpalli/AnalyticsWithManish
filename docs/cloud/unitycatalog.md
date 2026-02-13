@@ -171,4 +171,3 @@ Workflow for Data Masking:
     ALTER TABLE <table_name> ALTER COLUMN salary SET MASK <function_name>;
     ```
 5.  Result: When an unauthorized user queries the table, they see the masked values. When an authorized user (who is a member of the defined group) queries the table, they see the real, unmasked data.
-
