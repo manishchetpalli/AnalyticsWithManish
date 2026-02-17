@@ -1,0 +1,4067 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Data Engineering and Big Data Technologies">
+      
+      
+        <meta name="author" content="AnalyticsWithManish">
+      
+      
+      
+        <link rel="prev" href="../../DataEngineering/fileformat/">
+      
+      
+        <link rel="next" href="../../projects/FlightBookingDataPipelinewithAirflow%26CICD/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/sqldeveloper-original.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>SQL - AnalyticsWithManish</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AnalyticsWithManish" class="md-header__button md-logo" aria-label="AnalyticsWithManish" data-md-component="logo">
+      
+  <img src="../../assets/images/sqldeveloper-original.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AnalyticsWithManish
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/manishchetpalli/AnalyticsWithManish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AnalyticsWithManish
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../DataEngineering/DE/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projects/FlightBookingDataPipelinewithAirflow%26CICD/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hadoop/Bigdata/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  BigData
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cloud/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Cloud computing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../systemdesign/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  System Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tooling/airflow_install_onpremise/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  SetupDocs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hadoop/hadoopiq/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Interview Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About Me
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AnalyticsWithManish" class="md-nav__button md-logo" aria-label="AnalyticsWithManish" data-md-component="logo">
+      
+  <img src="../../assets/images/sqldeveloper-original.svg" alt="logo">
+
+    </a>
+    AnalyticsWithManish
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/manishchetpalli/AnalyticsWithManish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AnalyticsWithManish
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DataEngineering/DE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DataEngineering/DEcycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DE Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DataEngineering/DEundercurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DE UnderCurrents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DataEngineering/DesigningGDA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DE Architecture & Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../airflow/dataorchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datawarehousing/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Warehousing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DataEngineering/fileformat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a database?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-dbms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is DBMS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acid-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acid Properties
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics-of-a-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Basics of a Query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-ddl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL DDL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-dml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL DML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Where
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Joins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL SET
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-string-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL String Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-number-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Number Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-date-time-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Date Time Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-null-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL NULL Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/FlightBookingDataPipelinewithAirflow%26CICD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flight Booking Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/flink-ignite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink Ignite Custom Dialect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/kafkaapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI Kafka Producer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BigData
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BigData
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/Bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/HDFS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDFS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/mapreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MapReduce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/yarn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    YARN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/kerberos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kerberos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hive/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kafka/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ignite/ignite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ignite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../airflow/airflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spark/spark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mongo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../delta/deltalake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Delta Lake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Databricks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Databricks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/databricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    System Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemdesign/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemdesign/scaling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horizonatal vs Vertical Scaling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemdesign/loadbalancing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemdesign/consistenthashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistent Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemdesign/messagingqueue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SetupDocs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SetupDocs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tooling/airflow_install_onpremise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airflow Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tooling/igniteinstall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ignite Multi Node Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tooling/kafka_install_zookeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka Multi Node Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tooling/kubernetes_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tooling/spark3standalone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sparkstandalone Multi Node Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interview Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hadoop/hadoopiq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hadoop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kafka/iq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../airflow/airflowiq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flink/iq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongoiq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a database?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-dbms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is DBMS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acid-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acid Properties
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics-of-a-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Basics of a Query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-ddl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL DDL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-dml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL DML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Where
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Joins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL SET
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-string-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL String Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-number-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Number Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-date-time-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Date Time Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-null-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL NULL Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../DataEngineering/DE/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sql">SQL<a class="headerlink" href="#sql" title="Permanent link">#</a></h1>
+<h2 id="what-is-a-database"><strong>What is a database?</strong><a class="headerlink" href="#what-is-a-database" title="Permanent link">#</a></h2>
+<p>Database is structured, organised set of data.Think of it as a filecabinet whre you store data in different sections called tables.</p>
+<hr />
+<hr />
+<h2 id="what-is-dbms"><strong>What is DBMS?</strong><a class="headerlink" href="#what-is-dbms" title="Permanent link">#</a></h2>
+<p>A software which allows users to interact with data. Stores data in structured format. A schema defines the structure of data.</p>
+<hr />
+<h2 id="acid-properties"><strong>Acid Properties</strong><a class="headerlink" href="#acid-properties" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p>Atomicity:
+Each transaction is either properly carried out or the database reverts back to the state before the transaction has started.Atomicity enforces the "all or nothing" principle, ensuring that an entire transaction either completes successfully or is rolled back, preventing partial, inconsistent states. In a financial transfer, if a crash occurs after deducting funds from one account but before adding them to another, an atomic system would detect the failure before the final COMMIT and roll back the entire transaction.</p>
+</li>
+<li>
+<p>Consistency:
+Database must be in a consistent state before and after the transaction.Consistency guarantees that a transaction moves the database from one valid state to another, enforcing rules (like checking for sufficient funds) to prevent inconsistent results.</p>
+</li>
+<li>
+<p>Isolation:
+Multiple transactions occur independently without interference.Isolation is the "no interference policy," meaning multiple concurrent transactions operate independently without seeing each other's uncommitted changes; Delta achieves this using. Optimistic Concurrency Control (OCC).</p>
+</li>
+<li>
+<p>Durability:
+Successful transactions are persisted even in case of failure.Durability ensures that once a transaction is committed, it permanently remains recorded in the system, even in the event of crashes or power outages. This is achieved by logging the start of the operation and the final COMMIT status in a transaction log (ledger); if the system restarts and the log shows no COMMIT, the changes are rolled back</p>
+</li>
+</ul>
+<hr />
+<h2 id="the-basics-of-a-query"><strong>The Basics of a Query</strong><a class="headerlink" href="#the-basics-of-a-query" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>SELECT and FROM</em></strong></p>
+</blockquote>
+<p>A query is a way to ask the database a question to retrieve data without modifying the table structure or its contents.</p>
+<ul>
+<li>SELECT: Specifies which columns you want to retrieve. Use a star () to select all columns.</li>
+<li>FROM: Specifies the table where the data is located.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers;</code>
+retrieves every column and row from the "customers" table.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Selecting Specific Columns and Using Aliases</em></strong></p>
+</blockquote>
+<p>Instead of retrieving everything, you can specify a list of columns separated by commas.</p>
+<ul>
+<li>Syntax: <code>SELECT column1, column2 FROM table_name;</code>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not place a comma after the last column in your list, or SQL will return an error.
+Aliases (AS): You can temporarily rename a column in your result set for better readability using the <code>AS</code> keyword.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT country AS customer_country, SUM(score) AS total_score FROM customers GROUP BY country;</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Filtering Data: WHERE</em></strong></p>
+</blockquote>
+<p>The <code>WHERE</code> clause filters rows based on a specific condition. Only data that meets the condition is included in the output.</p>
+<ul>
+<li>Syntax: <code>SELECT  FROM customers WHERE score != 0;</code> (Retrieves customers whose score is not zero).</li>
+<li>Handling Strings: If your condition involves text (characters), the value must be enclosed in single quotes.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers WHERE country = 'Germany';</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Sorting Data: ORDER BY</em></strong></p>
+</blockquote>
+<p>Use <code>ORDER BY</code> to sort your results in a specific order.</p>
+<ul>
+<li>Mechanisms: Use <code>ASC</code> for ascending (lowest to highest, default) or <code>DESC</code> for descending (highest to lowest).</li>
+<li>Nested Sorting: You can sort by multiple columns. SQL prioritizes the first column listed; the second column is used to "refine" the sorting if there are duplicate values in the first column.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers ORDER BY country ASC, score DESC;</code> sorts by country alphabetically, then by highest score within each country.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Aggregation and Grouping: GROUP BY</em></strong></p>
+</blockquote>
+<p>The <code>GROUP BY</code> clause combines rows with the same values into summary rows. It is typically used with aggregate functions like <code>SUM</code>, <code>COUNT</code>, or <code>AVG</code>.</p>
+<ul>
+<li>Rule: Any non-aggregated column in your <code>SELECT</code> statement must also be included in the <code>GROUP BY</code> clause, or you will receive an error.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT country, SUM(score) FROM customers GROUP BY country;</code> provides the total score for each unique country.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Filtering Aggregated Data: HAVING</em></strong></p>
+</blockquote>
+<p><code>HAVING</code> is used to filter data after it has been aggregated by a <code>GROUP BY</code> clause.</p>
+<ul>
+<li>Difference from WHERE: <code>WHERE</code> filters individual rows before they are grouped; <code>HAVING</code> filters the results after the grouping logic is applied.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To find countries with an average score greater than 430: <code>SELECT country, AVG(score) FROM customers GROUP BY country HAVING AVG(score) &gt; 430;</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Distinct and Top Keywords</em></strong></p>
+</blockquote>
+<ul>
+<li>DISTINCT: Placed immediately after <code>SELECT</code>, it removes duplicate rows so that each value in the result is unique. Note that it is an "expensive" operation for the database, so it should only be used when necessary.</li>
+<li>TOP (or LIMIT): Restricts the number of rows returned based on their row number in the result set.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT TOP 3  FROM customers ORDER BY score DESC;</code> retrieves the three customers with the highest scores.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Coding Order vs. Execution Order</em></strong></p>
+</blockquote>
+<p>The order in which you write a query is different from the order in which the database executes it. Understanding this helps in building correct queries.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Step</th>
+<th style="text-align: left;">Coding Order (Syntax)</th>
+<th style="text-align: left;">Execution Order (Logic)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>SELECT</code> (with <code>DISTINCT</code> and <code>TOP</code>)</td>
+<td style="text-align: left;"><code>FROM</code> (Find the data)</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>FROM</code></td>
+<td style="text-align: left;"><code>WHERE</code> (Filter original rows)</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><code>WHERE</code></td>
+<td style="text-align: left;"><code>GROUP BY</code> (Aggregate/combine rows)</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>GROUP BY</code></td>
+<td style="text-align: left;"><code>HAVING</code> (Filter aggregated results)</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>HAVING</code></td>
+<td style="text-align: left;"><code>SELECT</code> / <code>DISTINCT</code> (Pick columns/unique values)</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"><code>ORDER BY</code></td>
+<td style="text-align: left;"><code>ORDER BY</code> (Sort the final list)</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>TOP</code> (Limit the number of rows)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>--- <strong><em>Comments in SQL</em></strong></p>
+</blockquote>
+<p>Comments are notes for the coder that the database engine ignores.</p>
+<ul>
+<li>Inline: Use two dashes (<code>--</code>).</li>
+<li>Multi-line: Wrap the text in <code>/</code> and <code>/</code>.</li>
+</ul>
+<hr />
+<h2 id="sql-ddl"><strong>SQL DDL</strong><a class="headerlink" href="#sql-ddl" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>The CREATE Command</em></strong></p>
+</blockquote>
+<p>The <code>CREATE</code> command is used to build a new object, like a table, within the database. Usually, a newly created table is empty.</p>
+<ul>
+<li>Syntax &amp; Logic: You must define the table name, column names, data types, and constraints.</li>
+<li>Data Types: Common types include <code>INT</code> (numbers), <code>VARCHAR</code> (characters/text), and <code>DATE</code>.</li>
+<li>Constraints: These are rules for the data, such as <code>NOT NULL</code> (the field must have a value) or <code>PRIMARY KEY</code> (a unique identifier for each row to ensure integrity).</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Creating a "Persons" Table
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">persons</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">ID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">person_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">birth_date</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span><span class="w"> </span><span class="c1">-- This is optional (nulls allowed)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">phone</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">PK_persons</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Setting the ID as the primary key</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">);</span>
+</span></code></pre></div></p>
+</div>
+<blockquote>
+<p>--- <strong><em>The ALTER Command</em></strong></p>
+</blockquote>
+<p>The <code>ALTER</code> command is used to edit or change the definition of an existing table, such as adding or removing columns or changing data types.</p>
+<ul>
+<li>Adding a Column: When you add a new column, it is automatically placed at the end of the table. If you want a column in the middle, you must drop the whole table and recreate it from scratch.</li>
+<li>Removing a Column: You only need to specify the column name; you do not need to provide the data type because the database already knows it. Warning: Deleting a column also deletes all data stored in that column.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Adding and Removing Columns</p>
+<p>To Add: <code>ALTER TABLE persons ADD email VARCHAR(50) NOT NULL;</code></p>
+<p>To Remove: <code>ALTER TABLE persons DROP COLUMN phone;</code></p>
+</div>
+<blockquote>
+<p>--- <strong><em>The DROP Command</em></strong></p>
+</blockquote>
+<p>The <code>DROP</code> command is used to completely remove a table and all its data from the database.</p>
+<ul>
+<li>Risk Level: This is described as the simplest but most risky command because it destroys the table and all its contents instantly.</li>
+<li>Comparison: Destroying a table with <code>DROP</code> is much easier than building one with <code>CREATE</code>.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Deleting a Table
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">persons</span><span class="p">;</span>
+</span></code></pre></div></p>
+</div>
+<hr />
+<h2 id="sql-dml"><strong>SQL DML</strong><a class="headerlink" href="#sql-dml" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>The INSERT Command</em></strong></p>
+</blockquote>
+<p>The <code>INSERT</code> command is used to add new rows to a table. These rows are typically appended to the end of the existing data.</p>
+<p>Method A: Manual Insertion</p>
+<p>In this method, you manually specify the values to be added via a script.</p>
+<ul>
+<li>Syntax: <code>INSERT INTO table_name (column_list) VALUES (value_list);</code>.</li>
+<li>Key Rules:
+       The number of columns and values must match.
+       The order of values must match the order of defined columns.
+       Specifying columns is optional; if skipped, SQL expects a value for every column in the table in its default order.
+       Nulls: Use <code>NULL</code> to indicate unknown data. Note that columns with constraints (like Primary Keys) will not allow null values.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>(Multiple Rows):
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">score</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Anna&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;USA&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Sam&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">(</span><span class="n">This</span><span class="w"> </span><span class="n">adds</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">execution</span><span class="p">;</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">comma</span><span class="w"> </span><span class="n">separating</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">lists</span><span class="p">).</span>
+</span></code></pre></div></p>
+</div>
+<p>Method B: Inserting from Another Table</p>
+<p>You can move data from a Source Table to a Target Table without writing manual values.</p>
+<ol>
+<li>
+<p>Select: Write a <code>SELECT</code> query to gather the desired data from the source.</p>
+</li>
+<li>
+<p>Insert: Wrap that query in an <code>INSERT INTO</code> statement.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Column names do not have to match between tables, but the data types and structure must be compatible.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>The UPDATE Command</em></strong></p>
+</blockquote>
+<p>The <code>UPDATE</code> command modifies existing rows. Unlike <code>INSERT</code>, it does not create new records; it changes the content of what is already there.</p>
+<ul>
+<li>Syntax: <code>UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;</code>.</li>
+<li>The Risk of WHERE: If you omit the <code>WHERE</code> clause, every single row in the table will be updated with the new value.</li>
+<li>Best Practice: Test your <code>WHERE</code> clause with a <code>SELECT</code> statement first to ensure you are targeting the correct records before running the update.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>(Updating Multiple Columns):
+To change customer 10's score and country simultaneously:
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;UK&#39;</span><span class="w"> </span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">(</span><span class="n">This</span><span class="w"> </span><span class="n">targets</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">specific</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="mi">10</span><span class="p">).</span>
+</span></code></pre></div></p>
+</div>
+<blockquote>
+<p>--- <strong><em>The DELETE and TRUNCATE Commands</em></strong></p>
+</blockquote>
+<p>These commands are used to remove data from your tables.</p>
+<p>DELETE:</p>
+<p>Removes specific rows based on a condition.</p>
+<ul>
+<li>Syntax: <code>DELETE FROM table_name WHERE condition;</code>.</li>
+<li>Warning: Just like <code>UPDATE</code>, forgetting the <code>WHERE</code> clause will delete all data in the table.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">(</span><span class="n">This</span><span class="w"> </span><span class="n">removes</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">recently</span><span class="w"> </span><span class="n">added</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">higher</span><span class="w"> </span><span class="k">than</span><span class="w"> </span><span class="mi">5</span><span class="p">).</span>
+</span></code></pre></div>
+</div>
+<p>TRUNCATE:</p>
+<p>If you want to empty a table completely while keeping its structure intact, <code>TRUNCATE</code> is the preferred method.</p>
+<ul>
+<li>Efficiency: It is much faster than <code>DELETE FROM table_name</code> because it does not use the same logging and background protocols.</li>
+<li>Behavior: It resets the table to an empty state and does not return the number of rows affected.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>DROP</th>
+<th>TRUNCATE</th>
+<th>DELETE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose</td>
+<td>Completely removes the entire table structure from the database</td>
+<td>Removes all rows from a table, but the table structure remains</td>
+<td>Removes specific rows based on a condition or all rows from a table, but the table structure remains</td>
+</tr>
+<tr>
+<td>Transaction Control</td>
+<td>Cannot be rolled back</td>
+<td>Cannot be rolled back</td>
+<td>Can be rolled back</td>
+</tr>
+<tr>
+<td>Space Reclaiming</td>
+<td>Releases the object and its space</td>
+<td>Frees the space containing the table</td>
+<td>Doesn't free up space, but leaves empty space for future use</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Fastest as it removes all data and structure</td>
+<td>Faster than DELETE as it doesn't log individual row deletions</td>
+<td>Slowest as it logs individual row deletions</td>
+</tr>
+<tr>
+<td>Referential Integrity</td>
+<td>Not checked</td>
+<td>Checked</td>
+<td>Checked</td>
+</tr>
+<tr>
+<td>Where Clause</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>Applicable</td>
+</tr>
+<tr>
+<td>Command Type</td>
+<td>DDL (Data Definition Language)</td>
+<td>DDL (Data Definition Language)</td>
+<td>DML (Data Manipulation Language)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sql-where"><strong>SQL Where</strong><a class="headerlink" href="#sql-where" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Core Logic of SQL Conditions</em></strong></p>
+</blockquote>
+<p>In SQL, the <code>WHERE</code> clause is used to filter data based on specific logic. A condition typically follows this formula: Expression -&gt; Operator -&gt; Expression.</p>
+<p>You can compare several types of data</p>
+<ul>
+<li>Column to Column: e.g., comparing first name to last name.</li>
+<li>Column to Static Value: e.g., <code>first_name = 'John'</code>.</li>
+<li>Functions: Applying a function like <code>UPPER</code> to a column before comparing.</li>
+<li>Math Expressions: e.g., <code>price  quantity = 1000</code>.</li>
+<li>Subqueries: Comparing a column to the result of another complete query.</li>
+</ul>
+<p>When a condition is applied, SQL evaluates the data row by row. If a row meets the condition (True), it is kept; if not (False), it is removed from the final result.</p>
+<blockquote>
+<p>--- <strong><em>Comparison Operators</em></strong></p>
+</blockquote>
+<p>These are the most basic operators used to compare two values.</p>
+<ul>
+<li>Equal (<code>=</code>): Retrieves exact matches.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers WHERE country = 'Germany';</code>.</p>
+</div>
+<ul>
+<li>Not Equal (<code>!=</code> or <code>&lt;&gt;</code>): Retrieves everything except the specified value.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers WHERE country != 'Germany';</code>.</p>
+</div>
+<ul>
+<li>Greater Than (<code>&gt;</code>) and Less Than (<code>&lt;</code>): Used for numerical ranges.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE score &gt; 500;</code>.</p>
+</div>
+<ul>
+<li>Greater Than or Equal to (<code>&gt;=</code>) and Less Than or Equal to (<code>&lt;=</code>): These are "mixed" operators that include the boundary value itself.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE score &gt;= 500;</code> (Includes rows where the score is exactly 500).</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Logical Operators</em></strong></p>
+</blockquote>
+<p>Logical operators combine multiple conditions within a single <code>WHERE</code> clause.</p>
+<ul>
+<li>AND: This is restrictive. All conditions must be True for a row to be included.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE country = 'USA' AND score &gt; 500;</code> (Only keeps customers who meet both criteria).</p>
+</div>
+<ul>
+<li>OR: This is less restrictive. A row is kept if at least one of the conditions is True.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE country = 'USA' OR score &gt; 500;</code>.</p>
+</div>
+<ul>
+<li>NOT: This is a reverse operator. it switches True to False and vice versa to exclude matching values.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE NOT score &lt; 500;</code> (This will return all scores that are 500 or higher).</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Range Operator: BETWEEN</em></strong></p>
+</blockquote>
+<p>The <code>BETWEEN</code> operator checks if a value falls within a specific range defined by a lower and upper boundary.</p>
+<ul>
+<li>Inclusivity: The boundaries are inclusive, meaning values exactly equal to the boundaries are considered inside the range.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers WHERE score BETWEEN 100 AND 500;</code>.
+Alternative: You can achieve the same result using comparison operators: <code>WHERE score &gt;= 100 AND score &lt;= 500;</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Membership Operators: IN and NOT IN</em></strong></p>
+</blockquote>
+<p>These operators check if a value exists within a specified list.</p>
+<ul>
+<li>Efficiency: Using <code>IN</code> is cleaner and more performant than writing multiple <code>OR</code> conditions for the same column.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers WHERE country IN ('Germany', 'USA');</code>.
+NOT IN: Reverses the logic to find values not present in the list.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Search Operator: LIKE</em></strong></p>
+</blockquote>
+<p>The <code>LIKE</code> operator is used for pattern matching within text strings. It relies on two special wildcards:</p>
+<ol>
+<li>Percentage (<code>%</code>): Represents "anything"—zero, one, or multiple characters.</li>
+<li>Underscore (<code>_</code>): Represents exactly one character.</li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Starts with: <code>WHERE first_name LIKE 'M%';</code> (Finds Maria, Martin, etc.).</p>
+<p>Ends with: <code>WHERE first_name LIKE '%n';</code> (Finds John, Martin, etc.).</p>
+<p>Contains: <code>WHERE first_name LIKE '%r%';</code> (Finds any name with an 'r' anywhere in it).</p>
+<p>Specific Position: <code>WHERE first_name LIKE '__r%';</code> (Uses two underscores to find names where 'r' is exactly the third character).</p>
+</div>
+<h2 id="sql-joins"><strong>SQL Joins</strong><a class="headerlink" href="#sql-joins" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Combining Tables: Joins vs. Set Operators</em></strong></p>
+</blockquote>
+<p>When you want to combine data from two tables (Table A and Table B), you must first decide whether you want to combine columns or rows.</p>
+<ul>
+<li>Joins: Used to combine columns side-by-side. This makes the resulting table wider.</li>
+<li>Set Operators (e.g., UNION): Used to stack rows on top of each other. This makes the resulting table longer.</li>
+<li>Requirement for Joins: You must define key columns (usually IDs) that exist in both tables to connect them.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Why Use Joins?</em></strong></p>
+</blockquote>
+<p>There are three primary reasons to use joins:</p>
+<ol>
+<li>Recombine Data: In professional databases, data is often spread across multiple tables (e.g., Customers, Addresses, Orders). Joins allow you to see the "big picture" in one result.</li>
+<li>Data Enrichment: Using a "lookup" or reference table to add extra information to a master table (e.g., adding zip codes to a customer list).</li>
+<li>Check Existence: Joining tables to filter data based on whether a record exists (or doesn't exist) in another table (e.g., finding customers who have never placed an order).</li>
+</ol>
+<blockquote>
+<p>--- <strong><em>The Four Basic Join Types*</em></strong></p>
+</blockquote>
+<p>A. Inner Join (The Default)</p>
+<p>An Inner Join returns only the rows where there is a match in both tables.</p>
+<ul>
+<li>Logic: It represents the "overlapping" area of two circles. If a row in the left table has no match in the right table (or vice versa), it is excluded from the results.</li>
+<li>Syntax: <code>SELECT columns FROM tableA INNER JOIN tableB ON tableA.key = tableB.key;</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The order of tables does not matter; you will get the same result whether you start with Table A or Table B.</p>
+</div>
+<p>B. Left Join
+A Left Join returns all rows from the left table and only the matching rows from the right table.</p>
+<ul>
+<li>Logic: The left table is your "primary" source. If there is no match in the right table, SQL will still show the left table's data but will display NULL for the missing right-side values.</li>
+<li>Syntax: <code>SELECT columns FROM tableA LEFT JOIN tableB ON tableA.key = tableB.key;</code></li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To see all customers including those without orders, use a Left Join starting with the customers table.</p>
+</div>
+<p>C. Right Join
+The Right Join is the exact opposite of the Left Join. It returns all rows from the right table and only the matching rows from the left table.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most developers prefer Left Joins. You can achieve a Right Join effect by simply switching the order of the tables in a Left Join.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT columns FROM tableA RIGHT JOIN tableB...</code> is the same as <code>SELECT columns FROM tableB LEFT JOIN tableA...</code>.</p>
+</div>
+<p>D. Full Join
+A Full Join returns everything from both tables, regardless of whether there is a match.</p>
+<ul>
+<li>Logic: It combines the effects of both Left and Right joins. You will see matching rows side-by-side, and unmatching rows from either table will show NULL for the missing side.</li>
+<li>Order: Like the Inner Join, the order of tables does not matter.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Best Practices for Writing Joins</em></strong></p>
+</blockquote>
+<ul>
+<li>Specify the Type: While <code>JOIN</code> often defaults to <code>INNER JOIN</code>, it is best practice to explicitly write <code>INNER</code>, <code>LEFT</code>, or <code>FULL</code> to avoid confusion.</li>
+<li>Use Table Aliases: When tables have long names, use the <code>AS</code> keyword to give them short nicknames (e.g., <code>customers AS C</code>). This makes the query easier to read.</li>
+<li>Prefix Column Names: When joining tables, always specify which table a column belongs to (e.g., <code>C.ID</code> vs <code>O.ID</code>) to avoid "ambiguous column" errors if both tables have columns with the same name.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Summary Table of Execution Logic</em></strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Join Type</th>
+<th style="text-align: left;">Left Table Data</th>
+<th style="text-align: left;">Right Table Data</th>
+<th style="text-align: left;">If No Match Exists...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Inner</td>
+<td style="text-align: left;">Matching Only</td>
+<td style="text-align: left;">Matching Only</td>
+<td style="text-align: left;">Row is excluded.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Left</td>
+<td style="text-align: left;">All Rows</td>
+<td style="text-align: left;">Matching Only</td>
+<td style="text-align: left;">Right columns show NULL.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Right</td>
+<td style="text-align: left;">Matching Only</td>
+<td style="text-align: left;">All Rows</td>
+<td style="text-align: left;">Left columns show NULL.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Full</td>
+<td style="text-align: left;">All Rows</td>
+<td style="text-align: left;">All Rows</td>
+<td style="text-align: left;">Missing sides show NULL.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>--- <strong><em>Left Anti-Join</em></strong></p>
+</blockquote>
+<p>A Left Anti-Join returns only the rows from the left table that have no match in the right table. It effectively filters out any overlapping data, leaving you with only the unique records in the primary (left) table.</p>
+<ul>
+<li>Syntax &amp; Logic: There is no specific "ANTI-JOIN" keyword in SQL Server. Instead, you create this effect in two steps:<ol>
+<li>Perform a standard LEFT JOIN.</li>
+<li>Use a WHERE clause to filter for rows where the right table's key IS NULL.</li>
+</ol>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To find "inactive" customers who have never placed an order
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">C</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">O</span><span class="p">.</span><span class="n">customer_id</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">O</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">This</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">who</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="k">corresponding</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">table</span><span class="p">.</span>
+</span></code></pre></div></p>
+</div>
+<blockquote>
+<p>--- <strong><em>Right Anti-Join</em></strong></p>
+</blockquote>
+<p>The Right Anti-Join is the exact opposite of the left version. It returns rows from the right table that have no match in the left table.</p>
+<ul>
+<li>Logic: The right table acts as the primary source, and the left table is used as a filter.</li>
+<li>The "Better" Way: While you can use a <code>RIGHT JOIN ... WHERE left_key IS NULL</code>, it is often cleaner to simply switch the table order and use a Left Join. Starting with the main table of interest on the left makes the query easier to read.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To find "orphaned" orders that do not have a valid customer associated with them:
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">O</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">C</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">O</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">ID</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</span></code></pre></div></p>
+</div>
+<blockquote>
+<p>--- ***Full Anti-Join**</p>
+</blockquote>
+<p>A Full Anti-Join returns all rows that do not match in either table. This is the opposite of an Inner Join; instead of showing only the overlap, it shows everything except the overlap.</p>
+<ul>
+<li>Syntax: Use a FULL JOIN combined with a WHERE clause using an OR operator to check for nulls on both sides.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To find all "strange cases" (customers with no orders AND orders with no customers) simultaneously:
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">C</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">FULL</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">O</span><span class="p">.</span><span class="n">customer_id</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">O</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</span></code></pre></div></p>
+</div>
+<blockquote>
+<p>--- <strong><em>Mimicking an Inner Join (Bonus Tip)</em></strong></p>
+</blockquote>
+<p>You can achieve the effect of an Inner Join by using a Left Join combined with a <code>WHERE ... IS NOT NULL</code> condition.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT  FROM customers AS C LEFT JOIN orders AS O ON C.ID = O.customer_id WHERE O.customer_id IS NOT NULL;</code>
+This keeps only the rows where a match was found, effectively filtering out the non-matching left-table rows.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Cross Join</em></strong></p>
+</blockquote>
+<p>A Cross Join (or Cartesian Join) combines every row from the left table with every row from the right table.</p>
+<ul>
+<li>Key Characteristics:
+       It generates all possible combinations.
+       The total number of rows returned is the product of the row counts of both tables (e.g., 5 customers × 4 orders = 20 rows).
+       No "ON" condition: Unlike other joins, you do not use a key to match rows because you are combining everything regardless of whether they match.</li>
+<li>Use Cases: It is rarely used in daily operations but is helpful for simulations, generating test data, or creating full matrices (e.g., combining every product with every available color).</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="p">;</span>
+</span></code></pre></div>
+</div>
+<blockquote>
+<p>--- <strong><em>Decision Tree for Joining Tables</em></strong></p>
+</blockquote>
+<p>When deciding how to combine tables, your choice depends on whether you are looking for matching data, all data, or unmatching data.</p>
+<ul>
+<li>
+<p>Matching Data Only: Use an Inner Join; this is the only type used when you strictly want the overlapping data between tables.</p>
+</li>
+<li>
+<p>All Data (No Missing Records):
+    Left Join: Use this when you have a master table (a "main" table) that is more important than the others and you want to keep all its records.
+    Full Join: Use this if all tables are equally important and you want to see all data from every side.</p>
+</li>
+<li>
+<p>Unmatching Data (Checkups):
+    Left Anti-Join: Use this to see unmatching data from one important side.
+    Full Anti-Join: Use this when both tables are important and you want to see unmatching data from both.</p>
+</li>
+</ul>
+<h2 id="sql-set"><strong>SQL SET</strong><a class="headerlink" href="#sql-set" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Core Rules for Set Operators</em></strong></p>
+</blockquote>
+<p>For a set operator to function, the participating queries must follow these strict structural rules:</p>
+<ul>
+<li>Rule 1: One Order By: You can only use the <code>ORDER BY</code> clause once, and it must be placed at the very end of the entire query.</li>
+<li>Rule 2: Matching Column Count: Both queries must select the exact same number of columns.</li>
+<li>Rule 3: Compatible Data Types: The data types of the columns must match or be compatible. SQL uses the first query to set the data type; if the second query's data cannot be converted (e.g., trying to map text to an integer), the query will fail.</li>
+<li>Rule 4: Identical Column Order: SQL maps columns by their position (the first column of Query A with the first column of Query B). You must ensure the data in those positions matches logically.</li>
+<li>Rule 5: First Query Controls Aliases: The column names (aliases) shown in the final output are determined solely by the first query. Any aliases in subsequent queries are ignored.</li>
+<li>Rule 6: Logical Mapping: SQL only checks if data types match, not if the data makes sense. It is the user's responsibility to ensure they aren't accidentally mapping "first names" to "last names".</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>The Four Set Operators</em></strong></p>
+</blockquote>
+<p>A. UNION</p>
+<p>Returns all distinct, unique rows from both queries. It combines the data and removes any duplicates found in the overlapping sets.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Combining a customer list and an employee list to find every unique person. If "Kevin Brown" is both a customer and an employee, he will appear only once in the result.</p>
+</div>
+<p>B. UNION ALL</p>
+<p>Returns all rows from both queries, including duplicates.</p>
+<ul>
+<li>Performance: <code>UNION ALL</code> is significantly faster than <code>UNION</code> because it skips the extra step of searching for and removing duplicates.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Combining the same lists as above, "Kevin Brown" would appear twice in the output.</p>
+</div>
+<p>C. EXCEPT (or MINUS)</p>
+<p>Returns distinct rows from the first query that are not found in the second query. This is the only set operator where the order of queries changes the result.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT name FROM employees EXCEPT SELECT name FROM customers;</code> finds employees who are not also customers.</p>
+</div>
+<p>D. INTERSECT</p>
+<p>Returns only the rows that are common to both queries (the overlap) and removes duplicates.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT name FROM employees INTERSECT SELECT name FROM customers;</code> finds only the people who are both employees and customers.</p>
+</div>
+<blockquote>
+<p>--- 3. Professional Use Cases and Examples</p>
+</blockquote>
+<ul>
+<li>
+<p>Use Case 1: Consolidating Similar Tables
+Instead of writing four separate reports for Employees, Customers, Suppliers, and Students, you can use <code>UNION</code> to combine them into one "Persons" table. This allows you to write a single analytical query on the combined data rather than repeating logic for four different tables.</p>
+</li>
+<li>
+<p>Use Case 2: Handling Split Tables
+Databases often split large tables by year (e.g., <code>Orders_2023</code>, <code>Orders_2024</code>). You can use <code>UNION</code> to recreate one master <code>Orders</code> table for multi-year analysis.</p>
+</li>
+<li>
+<p>Use Case 3: Data Migration and Quality Checks</p>
+</li>
+</ul>
+<p>To ensure two tables are identical after a migration:</p>
+<ol>
+<li>Run <code>TableA EXCEPT TableB</code>.</li>
+<li>Run <code>TableB EXCEPT TableA</code>.</li>
+<li>If both results are empty, the tables are 100% identical.</li>
+</ol>
+<blockquote>
+<p>--- <strong><em>Best Practices for Set Operators</em></strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Avoid <code>SELECT</code>: Explicitly list your columns. This prevents errors if one table's schema changes (e.g., adding or reordering columns) in the future.</p>
+</li>
+<li>
+<p>Add a "Source" Column: When combining tables, add a static string to identify where each row originated.</p>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Orders&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">SourceTable</span><span class="p">,</span><span class="w"> </span><span class="n">OrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Orders</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">UNION</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Archive&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">SourceTable</span><span class="p">,</span><span class="w"> </span><span class="n">OrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Orders_Archive</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">This</span><span class="w"> </span><span class="n">helps</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">distinguish</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="n">active</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">archived</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="n">report</span><span class="p">.</span>
+</span></code></pre></div>
+</div>
+<h2 id="sql-functions"><strong>SQL Functions</strong><a class="headerlink" href="#sql-functions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>What is an SQL Function?</em></strong></p>
+</blockquote>
+<p>A function is a built-in code block that accepts an input value, processes it through transformations, and returns a result as an output value. Functions are essential for four main types of tasks:</p>
+<ul>
+<li>Data Manipulation: Changing values to solve specific tasks.</li>
+<li>Aggregations &amp; Analysis: Finding insights and building reports.</li>
+<li>Data Cleansing: Identifying and fixing "bad" data within tables.</li>
+<li>Data Transformation: Converting data into a more usable format.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>The Two Main Categories</em></strong></p>
+</blockquote>
+<p>Functions are divided into two high-level groups based on how they handle rows:</p>
+<ul>
+<li>Single-Row Functions: These follow a "one value in, one value out" logic.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>If you input the name "Maria," the function processes that specific string and returns a single modified value (like "MARIA" or "ma").</p>
+</div>
+<ul>
+<li>Multi-Row (Aggregate) Functions: These take multiple rows as input and return a single summary value.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>The <code>SUM</code> function can take a column of values (e.g., 30, 10, 20, 40) and return the single total of 100.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Nesting Functions (The "Factory" Logic)</em></strong></p>
+</blockquote>
+<p>In SQL, you can nest functions, meaning you use multiple functions together to manipulate a single value. The sources compare this to a factory where material is processed through multiple stations.</p>
+<ul>
+<li>How it Works: The output of the first function becomes the input for the next function.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<ol>
+<li>LEFT: Extract the first two characters from "Maria" → Output: "Ma".</li>
+<li>LOWER: Take "Ma" and convert it to lowercase → Output: "ma".</li>
+<li>LEN (Length): Measure the characters in "ma" → Output: 2.</li>
+</ol>
+</div>
+<ul>
+<li>Execution Order: SQL always executes from the inner function to the outer function. In the example above, <code>LEFT</code> runs first, followed by <code>LOWER</code>, and finally <code>LEN</code>.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Functional Subcategories</em></strong></p>
+</blockquote>
+<p>Within the two main categories, functions are further grouped by the type of data they handle:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Single-Row Functions (Data Prep)</th>
+<th style="text-align: left;">Multi-Row Functions (Analysis)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">String: Manipulating text values.</td>
+<td style="text-align: left;">Basic Aggregates: Standard summaries like SUM or AVG.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Numeric: Handling math and numbers.</td>
+<td style="text-align: left;">Window/Analytical: Advanced functions for complex data analysis.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Date &amp; Time: Formatting and calculating time.</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Null Handling: Managing missing data.</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql-string-functions"><strong>SQL String Functions</strong><a class="headerlink" href="#sql-string-functions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Data Manipulation Functions</em></strong></p>
+</blockquote>
+<p>These functions are used to transform or combine existing string values into a new format.</p>
+<ul>
+<li>CONCAT (Concatenation): Combines multiple string values into a single column. This is useful for merging separated data, such as first and last names, into a "Full Name" field.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT CONCAT(first_name, ' ', country) AS name_country FROM customers;</code>.</p>
+</div>
+<ul>
+<li>UPPER and LOWER: These change the case of a string. <code>UPPER</code> capitalizes every character, while <code>LOWER</code> converts everything to lowercase.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT LOWER(first_name) AS low_name, UPPER(first_name) AS up_name FROM customers;</code>,.</p>
+</div>
+<ul>
+<li>TRIM: Removes "leading" (start) and "trailing" (end) spaces from a string. Spaces are often considered "evil" in data because they are hard to see but can cause errors in queries. To find rows with hidden spaces, compare the column to its trimmed version: <code>WHERE first_name != TRIM(first_name)</code>.</li>
+<li>REPLACE: Substitutes a specific "old" character or string with a "new" one. To remove a character entirely, replace the old value with an empty string (<code>''</code>),.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Changing a file extension from <code>.txt</code> to <code>.csv</code>: <code>REPLACE('reports.txt', '.txt', '.csv')</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Calculation Functions</em></strong></p>
+</blockquote>
+<p>LEN (Length): Counts the total number of characters, digits, or symbols in a value.</p>
+<ul>
+<li>Versatility: It works on strings, numbers, and dates (including separators like underscores or dashes).</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT LEN(first_name) FROM customers;</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Extraction Functions</em></strong>
+These are used to pull out specific parts of a string based on position,.</p>
+</blockquote>
+<ul>
+<li>LEFT and RIGHT: Extracts a specific number of characters starting from either the beginning (<code>LEFT</code>) or the end (<code>RIGHT</code>) of the string,. It is often best to <code>TRIM</code> a value before using <code>LEFT</code> or <code>RIGHT</code> to ensure you aren't accidentally extracting empty spaces.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT LEFT(first_name, 2)</code> retrieves the first two characters.</p>
+</div>
+<ul>
+<li>SUBSTRING: Extracts a part of a string starting from any specified position. It requires three arguments: the value, the starting position, and the number of characters to extract.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To extract two characters starting after the second character, you would set the starting position to 3.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Advanced Concept: Building Dynamic Queries</em></strong></p>
+</blockquote>
+<p>In professional SQL, functions are often nested to solve complex tasks. A common "trick" for the <code>SUBSTRING</code> function is to make it dynamic so it works on strings of varying lengths,.</p>
+<ul>
+<li>Dynamic Extraction: If you want to extract "everything after the first character," you can start at position 2 and use the <code>LEN</code> function as the third argument,. This ensures that whether a name is 4 characters or 20 characters long, the query will always capture the remainder of the string.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">SUBSTRING</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">first_name</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">LEN</span><span class="p">(</span><span class="n">first_name</span><span class="p">))</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="p">;</span>
+</span></code></pre></div>
+</div>
+<hr />
+<h2 id="sql-number-functions"><strong>SQL Number Functions</strong><a class="headerlink" href="#sql-number-functions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>The ROUND Function</em></strong></p>
+</blockquote>
+<p>The <code>ROUND</code> function is used to round a numeric value to a specified number of decimal places.</p>
+<ul>
+<li>How it Works: SQL looks at the digit immediately following your specified decimal place to determine whether to round the number up or leave it as is.
+   The "5 or Higher" Rule:
+       If the deciding digit is 5 or higher, SQL rounds the number up,.
+       If the deciding digit is less than 5, the number does not round up and stays as it is.</li>
+<li>Resetting Digits: Any digits remaining after the rounding point are reset to zero,.</li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p>Rounding to 2 Decimal Places: <code>ROUND(3.516, 2)</code> results in 3.52. The third digit (6) is higher than 5, so the second digit (1) rounds up to 2.
+Rounding to 1 Decimal Place: <code>ROUND(3.516, 1)</code> results in 3.5. The second digit (1) is less than 5, so the first digit (5) remains unchanged.
+Rounding to 0 Decimal Places: <code>ROUND(3.516, 0)</code> results in 4. Because the first digit after the decimal (5) is 5 or higher, the integer (3) is rounded up to 4.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>The ABS (Absolute) Function</em></strong></p>
+</blockquote>
+<p>The <code>ABS</code> function is used to determine the absolute value of a number, effectively converting any negative number into a positive number.</p>
+<ul>
+<li>Behavior:
+       If the input is negative, it returns the positive version.
+       If the input is already positive, the function does nothing and returns the same value.</li>
+<li>Professional Application: This is highly useful for correcting database errors. For example, if a database accidentally contains "negative sales" (which is logically impossible), you can use <code>ABS</code> to transform those errors into valid positive numbers.</li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p><code>ABS(-10)</code> returns 10.
+<code>ABS(10)</code> returns 10.</p>
+</div>
+<hr />
+<h2 id="sql-date-time-functions"><strong>SQL Date Time Functions</strong><a class="headerlink" href="#sql-date-time-functions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Three Sources of Dates</em></strong></p>
+</blockquote>
+<p>You can query date information from three different sources.
+1. Stored Columns: Data already saved in database tables (e.g., <code>order_date</code> or <code>creation_time</code>).
+2. Hardcoded Strings: Static dates added manually to a query (e.g., <code>'2025-08-20'</code>).
+3. GETDATE() Function: A fundamental function that returns the current system date and time at the moment the query is executed.</p>
+<blockquote>
+<p>--- <strong><em>Part Extraction Functions</em></strong></p>
+</blockquote>
+<p>These functions extract specific components from a date.</p>
+<ul>
+<li>Basic Extraction (Day, Month, Year)
+These functions are quick and return the result as an integer.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>SELECT MONTH(creation_time) AS month_num</code> returns <code>1</code> for January, <code>2</code> for February, etc..</p>
+</div>
+<ul>
+<li>DATEPART
+Returns a specific part of a date as an integer. It is more powerful than the basic functions because it can extract parts like weeks, quarters, and hours.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>DATEPART(quarter, creation_time)</code> returns <code>1</code> for dates in January through March.</p>
+</div>
+<ul>
+<li>DATENAME
+Similar to <code>DATEPART</code>, but it returns the name of the part as a string (text), making it ideal for human-readable reports.
+!!! Example:
+    <code>DATENAME(month, '2025-08-20')</code> returns "August" (string), whereas <code>DATEPART</code> would return 8 (integer).
+    Usage Tip: Use <code>DATENAME(weekday, date)</code> to get the full name of the day, such as "Wednesday".</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Truncation and Calculations</em></strong></p>
+</blockquote>
+<ul>
+<li>DATETRUNC
+This function "truncates" a date to a specific level in the hierarchy by resetting all lower levels to their minimum values (0 for time, 01 for days). If you truncate at the Month level, the Year and Month are kept, but the Day is reset to <code>01</code> and the Time is reset to <code>00:00:00</code>.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>DATETRUNC(year, creation_time)</code> resets everything to January 1st of that year.</p>
+</div>
+<ul>
+<li>EOMONTH (End of Month)
+Returns the last day of the month for a given date.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>If the input is <code>'2025-02-01'</code>, <code>EOMONTH</code> returns <code>'2025-02-28'</code>.
+Trick for Start of Month: While there is no "Start of Month" function, you can use <code>DATETRUNC</code> at the month level to get the first day of any month.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Professional Applications and Best Practices</em></strong></p>
+</blockquote>
+<ul>
+<li>Data Aggregation
+Extracting parts allows you to group data for reporting, such as calculating "Total Sales by Year" or "Orders per Month".</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To count orders per month:
+<code>SELECT MONTH(order_date), COUNT() FROM sales_orders GROUP BY MONTH(order_date);</code>.</p>
+</div>
+<ul>
+<li>Filtering Data
+You can use extracted parts in a <code>WHERE</code> clause to filter for specific timeframes.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>To see only February orders: <code>WHERE MONTH(order_date) = 2;</code>.
+Performance Tip: Always prefer filtering by integers (using <code>MONTH</code> or <code>DATEPART</code>) rather than strings (using <code>DATENAME</code>). Searching for numbers is faster for the database.</p>
+</div>
+<blockquote>
+<p>---  <strong><em>Formatting vs. Casting</em></strong></p>
+</blockquote>
+<ul>
+<li>Formatting: Changing how a value looks. For example, displaying a date with slashes instead of dashes, or showing a number with a currency symbol.</li>
+<li>Casting: Changing the data type from one to another. For example, converting a string of text ("123") into an actual integer (123) so you can perform math on it.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Date Format Specifiers</em></strong></p>
+</blockquote>
+<p>To format dates, SQL uses "format specifiers" which act as a code for different components. These are case-sensitive.</p>
+<ul>
+<li>Year: <code>yyyy</code> (4 digits) or <code>yy</code> (2 digits).</li>
+<li>Month: <code>MM</code> (2 digits), <code>MMM</code> (abbreviation), or <code>MMMM</code> (full name).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Big M is for Month; small m is for minutes.</p>
+</div>
+<ul>
+<li>Day: <code>dd</code> (2 digits), <code>ddd</code> (abbreviated name), or <code>dddd</code> (full name).</li>
+<li>Time: <code>HH</code> (24-hour), <code>hh</code> (12-hour), <code>mm</code> (minutes), <code>ss</code> (seconds), and <code>tt</code> (AM/PM designator).</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>The <code>FORMAT</code> Function</em></strong></p>
+</blockquote>
+<p>This function is used primarily to change the look of dates and numbers into a string value.</p>
+<ul>
+<li>Syntax: <code>FORMAT(value, format, [culture])</code></li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p>Date Formatting: <code>FORMAT(creation_time, 'dd-MM-yyyy')</code> changes the international standard (yyyy-MM-dd) to a European style.
+Number Formatting:
+   'N': Adds commas to large numbers (Numeric).
+   'C': Adds a currency symbol (Currency).
+   'P': Converts the number to a percentage (Percentage).
+Custom Strings: You can combine static text with <code>FORMAT</code> to create complex labels, such as "Day: Monday Jan Q1 2025".</p>
+</div>
+<blockquote>
+<p>--- <strong><em>The <code>CONVERT</code> Function</em></strong></p>
+</blockquote>
+<p><code>CONVERT</code> is a versatile function that can perform both casting and formatting for date and time values.</p>
+<ul>
+<li>Syntax: <code>CONVERT(data_type, value, [style_number])</code></li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p>Casting Only: <code>CONVERT(int, '123')</code> turns a string into an integer.
+Casting and Formatting: <code>CONVERT(varchar, creation_time, 32)</code> converts a date-time value into a string formatted as <code>MM-dd-yyyy</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>The <code>CAST</code> Function</em></strong></p>
+</blockquote>
+<p><code>CAST</code> is the most straightforward function, used strictly for changing data types. It does not allow for custom styling or formatting; it always returns the SQL standard format.</p>
+<ul>
+<li>Syntax: <code>CAST(value AS data_type)</code></li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p>String to Number: <code>CAST('123' AS int)</code>.
+DateTime to Date: <code>CAST(creation_time AS date)</code> removes the time information and keeps only the date.
+Integer to String: <code>CAST(123 AS varchar)</code>.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Function Comparison Summary</em></strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;"><code>CAST</code></th>
+<th style="text-align: left;"><code>CONVERT</code></th>
+<th style="text-align: left;"><code>FORMAT</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Primary Goal</td>
+<td style="text-align: left;">Change data type</td>
+<td style="text-align: left;">Change type &amp; format</td>
+<td style="text-align: left;">Change look (to string)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Formatting</td>
+<td style="text-align: left;">No formatting</td>
+<td style="text-align: left;">Date/Time styles only</td>
+<td style="text-align: left;">Date/Time and Numbers</td>
+</tr>
+<tr>
+<td style="text-align: left;">Output Type</td>
+<td style="text-align: left;">Any type</td>
+<td style="text-align: left;">Any type</td>
+<td style="text-align: left;">String only</td>
+</tr>
+<tr>
+<td style="text-align: left;">Best For...</td>
+<td style="text-align: left;">Quick type changes</td>
+<td style="text-align: left;">Date standard styles</td>
+<td style="text-align: left;">Custom reports/Numbers</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>FORMAT</code> is highly useful for data preparation before aggregation. You can format dates as 'MMM-yy' (e.g., "Jan-25") and then group by that column to create clean, readable monthly sales reports.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>DATEADD Function</em></strong></p>
+</blockquote>
+<p>The DATEADD function is used to add or subtract a specific time interval (years, months, days, etc.) to or from a date,.</p>
+<ul>
+<li>Syntax: <code>DATEADD(part, interval, date)</code>.
+    Part: The specific portion of the date you want to manipulate (e.g., <code>year</code>, <code>month</code>, <code>day</code>).
+    Interval: The amount you want to change. A positive number adds time, while a negative number subtracts time.
+    Date: The original date value you are starting from.</li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p>Adding Years: <code>DATEADD(year, 2, order_date)</code> results in a date exactly two years later than the original.
+Adding Months: <code>DATEADD(month, 3, order_date)</code> moves the date three months forward (e.g., January becomes April).
+Subtracting Days: <code>DATEADD(day, -10, order_date)</code> retrieves a date 10 days before the original.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>DATEDIFF Function</em></strong></p>
+</blockquote>
+<p>The DATEDIFF function calculates the difference between two dates and returns the result as a number,.</p>
+<ul>
+<li>
+<p>Syntax: <code>DATEDIFF(part, start_date, end_date)</code>.
+    Part: The unit of measurement for the result (e.g., how many <code>years</code>, <code>months</code>, or <code>days</code> are between them).
+    Start Date: The earlier (younger) date.
+    End Date: The later (older) date.</p>
+</li>
+<li>
+<p>Professional Use Cases:</p>
+</li>
+<li>
+<p>Calculating Age: To find an employee's age, you calculate the years between their birth date and the current date: <code>DATEDIFF(year, birth_date, GETDATE())</code>,.</p>
+</li>
+<li>Shipping Duration: To find how long it took to ship an order, you calculate the days between the order date and the shipping date: <code>DATEDIFF(day, order_date, ship_date)</code>.</li>
+<li>Time Gap Analysis: You can use <code>DATEDIFF</code> alongside the <code>LAG</code> window function to find the number of days between a current order and the previous order placed by a customer,.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>ISDATE Function</em></strong></p>
+</blockquote>
+<p>The ISDATE function is a validation tool used to check if a string or value is a valid date.</p>
+<ul>
+<li>Return Values: It returns 1 (True) if the value is a valid date and 0 (False) if it is not.</li>
+<li>Logic: SQL evaluates whether the value follows standard database date formats.</li>
+</ul>
+<div class="admonition examples">
+<p class="admonition-title">Examples</p>
+<p><code>ISDATE('2025-08-20')</code> returns 1.
+<code>ISDATE('123')</code> returns 0.
+<code>ISDATE('2025')</code> returns 1 (SQL is smart enough to interpret a single year as the first of January of that year).
+Non-standard formats: If you provide a date in a format SQL does not recognize (e.g., <code>day/month/year</code> when the system expects <code>year/month/day</code>), it will return 0.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Advanced Use Case: Data Cleansing</em></strong></p>
+</blockquote>
+<p>A major use for <code>ISDATE</code> is handling data quality issues where a string column contains mostly dates but some "corrupt" or invalid text.</p>
+<ul>
+<li>The Problem: Attempting to <code>CAST</code> a string column directly to a <code>DATE</code> type will result in a query error if even one row contains invalid data.</li>
+<li>The Solution: Use a CASE WHEN statement combined with <code>ISDATE</code> to safely convert the data.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">CASE</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">ISDATE</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="k">CAST</span><span class="p">(</span><span class="n">order_date</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="c1">-- Or a dummy value like &#39;9999-12-31&#39;</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">New_Order_Date</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">This</span><span class="w"> </span><span class="n">approach</span><span class="w"> </span><span class="n">allows</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">successfully</span><span class="w"> </span><span class="k">convert</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="n">strings</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">dates</span><span class="w"> </span><span class="n">while</span><span class="w"> </span><span class="n">turning</span><span class="w"> </span><span class="n">invalid</span><span class="w"> </span><span class="n">strings</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="o">`</span><span class="k">NULL</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="k">or</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">identifiable</span><span class="w"> </span><span class="n">dummy</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">instead</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">crashing</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">entire</span><span class="w"> </span><span class="n">query</span><span class="p">.</span>
+</span></code></pre></div>
+</div>
+<hr />
+<h2 id="sql-null-functions"><strong>SQL NULL Functions</strong><a class="headerlink" href="#sql-null-functions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>--- <strong><em>Understanding NULLs</em></strong></p>
+</blockquote>
+<p>In SQL, a NULL represents a missing, unknown, or nonexistent value.
+   It is not zero: NULL is not equivalent to the number 0.
+   It is not an empty string: It is not a blank space or an empty set of quotes ('').
+   Logical Meaning: A NULL simply tells us that there is "nothing" there or the value is currently unknown.</p>
+<blockquote>
+<p>--- <strong><em>Functions to Replace NULLs</em></strong></p>
+</blockquote>
+<p>If you want to remove a NULL from your results and replace it with a meaningful value, you use <code>ISNULL</code> or <code>COALESCE</code>.</p>
+<p>A. ISNULL (SQL Server Specific)</p>
+<p>This function checks a value and replaces it if it is NULL. It is limited to two arguments.
+   Syntax: <code>ISNULL(check_expression, replacement_value)</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>(Static Replacement): <code>ISNULL(shipping_address, 'Unknown')</code> replaces any missing address with the word "Unknown".
+(Column Replacement): <code>ISNULL(shipping_address, billing_address)</code> uses the billing address as a backup if the shipping address is missing.</p>
+</div>
+<p>B. COALESCE (Standard SQL)</p>
+<p><code>COALESCE</code> is more flexible and powerful because it accepts a list of multiple values. It returns the first non-null value in that list, checking from left to right.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>COALESCE(shipping_address, billing_address, 'N/A')</code>. SQL checks the shipping address; if that's null, it checks the billing address; if both are null, it returns "N/A".
+Advantage: It is a database standard and works across SQL Server, Oracle, and MySQL, making scripts easier to migrate.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Function to Create NULLs: NULLIF</em></strong></p>
+</blockquote>
+<p><code>NULLIF</code> does the opposite of the functions above; it replaces a real value with a NULL.</p>
+<ul>
+<li>Logic: It returns NULL if the two values are equal. If they are not equal, it returns the first value.
+Use Case (Data Cleansing): If a price is entered as -1 (an error), you can turn it into a NULL: <code>NULLIF(price, -1)</code>.
+Use Case (Preventing Errors): To avoid "Divide by Zero" errors, you can wrap the divisor: <code>Sales / NULLIF(quantity, 0)</code>.</li>
+</ul>
+<blockquote>
+<p>--- <strong><em>Keywords for Checking NULLs</em></strong></p>
+</blockquote>
+<p>To filter or check for the existence of NULLs without changing them, use these boolean keywords.</p>
+<ul>
+<li>IS NULL: Returns true if the value is missing.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE score IS NULL</code> finds customers with no scores.</p>
+</div>
+<ul>
+<li>IS NOT NULL: Returns true if a value exists.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>WHERE score IS NOT NULL</code> retrieves a clean list of customers with scores.</p>
+</div>
+<blockquote>
+<p>--- <strong><em>Professional Use Cases</em></strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Data Aggregations
+Standard aggregate functions (SUM, AVG, MIN, MAX) totally ignore NULLs.
+   The Risk: If you have sales of 15, 25, and NULL, <code>AVG</code> will return 20 (it divides by 2 instead of 3).
+   The Fix: If the business considers a NULL to be a zero, handle it first: <code>AVG(COALESCE(score, 0))</code>.</p>
+</li>
+<li>
+<p>Mathematical &amp; String Operations
+Any operation involving a NULL (using <code>+</code>, <code>-</code>, etc.) results in a NULL because you cannot perform math on an unknown value.
+   String Concatenation: <code>First_Name + ' ' + Last_Name</code> will return NULL if the last name is missing.
+   The Fix: Use <code>COALESCE(last_name, '')</code> to replace the NULL with an empty string so the first name still displays.</p>
+</li>
+<li>
+<p>Joining Tables
+SQL cannot compare NULLs in join keys. If Table A has a NULL in the key and Table B also has a NULL, an Inner Join will ignore them, and you will lose data.
+   The Fix: Handle the NULLs directly in the <code>ON</code> clause: <code>ON ISNULL(T1.Type, '') = ISNULL(T2.Type, '')</code>.</p>
+</li>
+<li>
+<p>Sorting Data
+By default, <code>ORDER BY</code> places NULLs at the start of an ascending list.</p>
+</li>
+</ul>
+<p>Professional Solution: To force NULLs to the end while keeping the rest in ascending order, create a "flag" column</p>
+<div class="codehilite"><pre><span></span><code><span class="err">``</span><span class="no">`sql</span>
+<span class="n">ORDER</span><span class="w"> </span><span class="n">BY</span><span class="w"> </span><span class="p">(</span><span class="n">CASE</span><span class="w"> </span><span class="n">WHEN</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="n">IS</span><span class="w"> </span><span class="n">NULL</span><span class="w"> </span><span class="n">THEN</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="n">ELSE</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="n">END</span><span class="p">),</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="n">This</span><span class="w"> </span><span class="n">pushes</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">NULLs</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bottom</span><span class="w"> </span><span class="n">regardless</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="n">values</span><span class="p">.</span>
+<span class="err">```</span>
+</code></pre></div>
+
+<ul>
+<li>Advanced: Left Anti-Join
+This technique finds records in the left table that have no match in the right table (e.g., customers who have never placed an order).
+   How-To: Perform a <code>LEFT JOIN</code> and then use <code>WHERE [Right_Table_Key] IS NULL</code> to filter for the unmatching rows.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../DataEngineering/fileformat/" class="md-footer__link md-footer__link--prev" aria-label="Previous: File Formats">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                File Formats
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../projects/FlightBookingDataPipelinewithAirflow%26CICD/" class="md-footer__link md-footer__link--next" aria-label="Next: Flight Booking Data Pipeline">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Flight Booking Data Pipeline
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Manishkumar Chetpalli
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/manishkumarchetpalli/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/manish-chet" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotation", "content.code.copy", "content.tooltips", "content.tabs.link", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.instant.preview", "navigation.tracking", "navigation.path", "search.highlight", "search.suggest", "search.share", "navigation.footer", "content.action.feedback", "toc.follow", "toc.extend"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
