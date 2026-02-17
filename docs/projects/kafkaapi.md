@@ -6,7 +6,7 @@ A **FastAPI-based REST API** for publishing JSON messages to **Apache Kafka** to
 
 
 
-![Steps](FastAPI.svg)
+![Steps](fastapi.svg)
 
 ## **Features**
 
