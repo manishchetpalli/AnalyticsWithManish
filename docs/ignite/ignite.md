@@ -2,7 +2,7 @@
 
 Apache Ignite provides a convenient and easy-to-use interface for developers to work with large-scale data sets in real time and other aspects of in-memory computing.
 
-## Features
+## **Features**
 
 Apache Ignite has the following features:
 
@@ -14,7 +14,7 @@ Apache Ignite has the following features:
 
 The following figure illustrates the basic features of Apache Ignite:
 
-## Primary Capabilities
+## **Primary Capabilities**
 
 - Elasticity: An Apache Ignite cluster can grow horizontally by adding new nodes.
 - Persistence: Apache Ignite data grid can persist cache entries in RDBMS, even in NoSQL like MongoDB or Cassandra.
@@ -26,7 +26,7 @@ The following figure illustrates the basic features of Apache Ignite:
 - Streaming: Apache Ignite allows processing continuous never-ending streams of data in scalable and fault-tolerant fashion in-memory, rather than analyzing the data after it has been stored in the database.
 
 
-### Caching Topology
+## **Caching Topology**
 
 Ignite provides three different approaches to caching topology: Partitioned, Replicated and Local. A cache mode is configured for each cache individually. Every caching topology has its own goal with pros and cons. The default cache topology is partitioned, without any backup option.
 
@@ -38,7 +38,7 @@ Ignite provides three different approaches to caching topology: Partitioned, Rep
 3. Local: This is a very primitive version of cache mode; with this approach, no data is distributed to other nodes in the cluster. As far as the Local cache does not have any replication or partitioning process, data fetching is very inexpensive and fast. It provides zero latency access to recently and frequently used data. The local cache is mostly used in read-only operations. It also works very well for read/write-through behavior, where data is loaded from the data sources on cache misses. Unlike a distributed cache, local cache still has all the features of distributed cache; it provides query caching, automatic data eviction and much more.
 
 
-### Caching Strategy
+## **Caching Strategy**
 
 With the explosion of high transactions web applications and mobile apps, data storage has become the main bottleneck of performance. In most cases, persistence stores such as relational databases cannot scale out perfectly by adding more servers. In this circumstance, in-memory distributed cache offers an excellent solution to data storage bottleneck. It extends multiple servers (called a grid) to pool their memory together and keep the cache synchronized across all servers. There are two main strategies to use in a distributed in-memory cache.
 
@@ -47,7 +47,7 @@ With the explosion of high transactions web applications and mobile apps, data s
 3. Write behind: It is also possible to use write-behind to get better write performance. Write-behind lets your application quickly update the cache and return. It then aggregates the updates and asynchronously flushes them to persistence store as a bulk operation. Also with Write-behind, you can specify throttling limits, so the database writes are not performed as fast as the cache updates and therefore the pressure on the database is lower. Additionally, you can schedule the database writes to occur during off-peak hours, which can minimize the pressure on the Database.
 
 
-### CAP Theorem and Where Does Ignite Stand
+## **CAP Theorem and Where Does Ignite Stand**
 
 - CA system: In this approach, you sacrifice partition tolerance for getting consistency and availability. Your database system offers transactions, and the system is highly available. Most of the relational databases are classified as CA systems. This system has serious problems with scaling.
 - CP system: the opposite of the CA system. In CP system availability is sacrificed for consistency and partition-tolerance. In the event of the node failure, some data will be lost.
@@ -55,20 +55,20 @@ With the explosion of high transactions web applications and mobile apps, data s
 
 Now, we can return back to our question, where does Ignite stand in the CAP theorem? At first glance, Ignite can be classified by CP, because Ignite is fully ACID compliant distributed transactions with partitioned tolerance. But this is half part of the history. Apache Ignite can also be considered an AP system. But why does Ignite have two different classifications? Because it has two different transactional modes for cache operations, transactional and atomic. In transactional mode, you can group multiple DML operations in one transaction and make a commit into the cache. In this scenario, Ignite will lock data on access by a pessimistic lock. If you configure backup copy for the cache, Ignite will use 2p commit protocol for its transaction. On the other hand, in atomic mode Ignite supports multiple atomic operations, one at a time. In the atomic mode, each DML operation will either succeed or fail and neither Read nor Write operation will lock the data at all. This mode gives a higher performance than the transactional mode. When you make a write in Ignite cache, for every piece of data there will be a master copy in primary node and a backup copy (if defined). When you read data from Ignite grid, you always read from the Primary node, unless the Primary node is down, at which time data will be read from the backup. From this point of view, you gain the system availability and the partition-tolerance of the entire system as an AP system. In the atomic mode, Ignite is very similar to Apache Cassandra. However, real world systems rarely fall neatly into all of these above categories, so it's more helpful to view CAP as a continuum. Most systems will make some effort to be consistent, available, and partition tolerant, and many can be tuned depending on what's most important.
 
-### Zero SPOF
+## **Zero SPOF**
 
 In any distributed system, node failure should be expected, particularly as the size of the cluster grows. The Zero Single Point of Failure (SPOF) design pattern ensures that no single part of a system can stop the entire cluster or system from working. Sometimes, the system using master-slave replication or the mixed master-master system falls into this category. Prior to Hadoop 2.0.0, the Hadoop NameNode was an SPOF in an HDFS cluster. Netflix has calculated the revenue loss for each ms of downtime or latency, and it is not small at all. Most businesses do not want single points of failure for the obvious reason. Apache Ignite, as a horizontally scalable distributed system, is designed in such way that all nodes in the cluster are equal, you can read and write from any node in the cluster. There are no master-slave communications in the Ignite cluster. Data is backed up or replicated across the cluster so that failure of any node doesn't bring down the entire cluster or the application. This way Ignite provides a dynamic form of High Availability. Another benefit of this approach is the ease at which new nodes can be added. When new nodes join the cluster, they can take over a portion of data from the existing nodes. Because all nodes are the same, this communication can happen seamlessly in a running cluster.
 
 
 
-### How SQL Queries Work in Ignite
+## **How SQL Queries Work in Ignite**
 
 In chapter one, we introduced Ignite SQL query feature very superficially. In chapter four, we will go into more details about Ignite SQL queries. It's interesting to know how a query processes under the hood of Ignite. There are two main approaches to process SQL queries in Ignite:
 
 - In-memory Map-Reduce: If you are executing any SQL query against a Partitioned cache, Ignite under the hood splits the query into in-memory map queries and a single reduce query. The number of map queries depends on the size of the partitions and number the partitions in the cluster. Then all map queries are executed on all data nodes of the participating caches, providing results to the reducing node, which will, in turn, run the reduce query over these intermediate results. If you are not familiar with the Map-Reduce pattern, you can imagine it as a Java Fork-join process.
 - H2 SQL engine: if you are executing SQL queries against Replicated or Local cache, Ignite knows that all data is available locally and runs a simple local SQL query in the H2 database engine. Note that, in replicated caches, every node contains a replica data for other nodes. H2 database is a free database written in Java and can work in an embedded mode. Depending on the configuration, every Ignite node can have an embedded H2 SQL engine.
 
-### Performance Tuning SQL Queries
+## **Performance Tuning SQL Queries**
 
 There are a few principles you should follow or consider when using SQL queries against Ignite cache:
 
@@ -81,7 +81,7 @@ There are a few principles you should follow or consider when using SQL queries 
 
 
 
-### Expiration & Eviction of Cache Entries in Ignite
+## **Expiration & Eviction of Cache Entries in Ignite**
 
 Apache Ignite caches are very powerful and can be configured and tuned to suit the needs of most applications. Apache Ignite provides two different approaches for data refreshing, which refers to an aspect of a copy of data (e.g,. entries in a cache) being up-to-date with the source version of the data. A stale copy of the data is considered to be out of use. Expiration and Evictions of cache entries is one of the key aspects of caching.
 
@@ -105,7 +105,7 @@ Usually, caches are unbounded, i.e. they grow indefinitely and it is up to the a
 3. Sorted: Sorted eviction policy is similar to FIFO eviction policy with the difference that the entries order is defined by default or user defined comparator and ensures that the minimal entry (i.e. the entry that has integer key with the smallest value) gets evicted first. Default comparator uses cache entries keys for comparison that imposes a requirement for keys to implementing Comparable interface. The user can provide own comparator implementation which can use keys, values or both for entries comparison. Supports batch eviction and eviction by memory size limit.
 4. Random: This cache eviction policy selects random cache entry for eviction if cache size exceeds the getMaxSize parameter. This implementation is extremely light weight, lock-free, and does not create any data structures to maintain any order for eviction. Random eviction will provide the best performance over any key queue in which every key has the same probability of being accessed. This eviction policy implementation doesn't support near cache and doesn't work on client nodes. This eviction policy is mainly used for debugging and benchmarking purposes. 
 
-### Discovery and communication mechanisms
+## **Discovery and communication mechanisms**
 
 Any distributed system that scales linearly has at least two mechanisms: one for communication with each other, and another to discover other nodes in the cluster. These two mechanisms or techniques are the backbone of any cluster that scale-out horizontally when needed. Also, they are responsible for forming the cluster, adding new nodes, handling failures or passing messages to the nodes.
 
@@ -125,14 +125,11 @@ Ignite provides DiscoverySpi Java interface that allows discovering remote nodes
 the current topology states. It also stores attributes of the nodes (user-defined attributes),the order that a node connected to the cluster, queues for storing user-defined events. All the messages about topology exchanges through Zookeeper, nodes are not communicated directly with each other. So, ZooKeeper cluster is used as primary storage of information for the current topology states in this implementation. Also, it stores attributes of the nodes (user-defined attributes), the order that a node connected to the cluster, queues for storing user-defined events. All the messages about topology exchanges through Zookeeper, nodes are not communicated directly with each other.Another essential functionality of ZooKeeper is the mechanism of notifying clients about changes. ZooKeeper allows you to store arbitrary, client information directly in the service. The recorded information can be accessed by all ZooKeeper clients once it save. ZooKeeper also provides opportunities to handle the split-brain scenario and network segmentation.
 
 Communication:
+
 Besides to discover nodes in a cluster, there are still needs for some direct communication between nodes for sending and receiving messages such as task execution, monitoring partition exchanges, etc. Ignite provides a CommunicationSpi which is responsible for peer- to-peer communication and data exchanges between nodes. Ignite CommunicationSpi is one of the most crucial SPI in Ignite. It is used heavily throughout the system and provides means for all data exchanges between nodes, such as internal implementation details and user-driven messages.Ignite comes with a built-in CommunicationSpi implementation: TcpCommunicationSpi, which uses TCP/IP protocols and Java NIO to communicate with other nodes.TcpCommunicationSpi uses IP address and port of the local node attributes to communicate
 with other nodes. At startup, this SPI tries to start listening to a local port specified by the configuration. SPI will automatically increment the port number until it can successfully bind for listening if the local port is occupied. TcpCommunicationSpi caches connections to remote nodes, so it does not have to reconnect every time a message is sent. Idle connections are kept active for 10 minutes by default, and they are closed. You can configure the idle connection timeout by the setIdleConnectionTimeout parameter.
 
 
-### Client Connectors Variety
+## **Client Connectors Variety**
+
 - [Ignite Client connectors](https://medium.com/swlh/apache-ignite-client-connectors-variety-41aed7c12361#:~:text=If%20you%20have%20worked%20with,might%20get%20a%20little%20confusing)
-
-
-
-
-

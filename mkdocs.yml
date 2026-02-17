@@ -76,11 +76,7 @@ nav:
       - MapReduce: hadoop/mapreduce.md
       - YARN: hadoop/yarn.md
       - Kerberos: hadoop/kerberos.md
-      - Hive:
-        - Overview: hive/overview.md
-        - SerDe: hive/serde.md
-        - Partitioning & bucketing: hive/partition.md
-        - Joins: hive/join.md
+      - Hive: hive/overview.md
       - Kafka: kafka/overview.md
       - Ignite: ignite/ignite.md
       - Airflow: airflow/airflow.md
@@ -105,7 +101,6 @@ nav:
     - Sparkstandalone Multi Node Setup: tooling/spark3standalone.md
   - Interview Prep:
     - Hadoop : hadoop/hadoopiq.md
-    - Hadoop Scenario based: hadoop/hadoopscenarios.md
     - Kafka : kafka/iq.md
     - Airflow : airflow/airflowiq.md
     - Flink  : flink/iq.md

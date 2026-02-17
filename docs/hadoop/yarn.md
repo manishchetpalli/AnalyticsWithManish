@@ -4,18 +4,19 @@ In essence, YARN is responsible for managing cluster resources, which include CP
 
 The ambition of YARN is to consolidate all types of distributed computation capabilities into a single cluster, thereby eliminating the need for multiple clusters and the associated pain of data movement or duplication. Popular execution engines that operate on top of YARN include Apache Spark, Apache Storm, Apache Solr, and Apache Tez. While some NoSQL databases like Cassandra are not yet YARN-enabled, an incubating Apache project called Slider aims to integrate them into a YARN-managed Hadoop cluster, including existing implementations for HBase and Accumulo, without requiring changes to those systems themselves. Apache Slider also seeks to introduce on-demand scale-up and scale-down capabilities, offering elasticity similar to cloud providers.
 
-### **Components of YARN**
+## **Components of YARN**
 
-#### Resource Manager 
-Resource Manager is the master daemon of YARN. It is responsible for managing several other applications, along with the global assignments of resources such as CPU and memory. It is used for job scheduling.
+- Resource Manager 
 
-Resource Manager has two components:
+    Resource Manager is the master daemon of YARN. It is responsible for managing several other applications, along with the global assignments of resources such as CPU and memory. It is used for job scheduling.
 
-- Scheduler: Schedulers’ task is to distribute resources to the running applications. It only deals with the scheduling of tasks and hence it performs no tracking and no monitoring of applications.
+    Resource Manager has two components:
 
-- Application Manager: The application Manager manages applications running in the cluster. Tasks, such as the starting of Application Master or monitoring, are done by the Application Manager.
+        1. Scheduler: Schedulers’ task is to distribute resources to the running applications. It only deals with the scheduling of tasks and hence it performs no tracking and no monitoring of applications.
 
-#### Node Manager
+        2. Application Manager: The application Manager manages applications running in the cluster. Tasks, such as the starting of Application Master or monitoring, are done by the Application Manager.
+
+## **Node Manager**
 Node Manager is the slave daemon of YARN. 
 
 It has the following responsibilities:
@@ -30,7 +31,7 @@ It has the following responsibilities:
 
 - Node Manager can also destroy or kill the container if it gets an order from the Resource Manager to do so.
 
-#### Application Master
+## **Application Master**
 Every job submitted to the framework is an application, and every application has a specific Application Master associated with it. 
 
 Application Master performs the following tasks:
@@ -45,7 +46,7 @@ Application Master performs the following tasks:
 
 Now, we will step forward with the fourth component of Apache Hadoop YARN.
 
-#### Container
+## **Container**
 A container is a set of physical resources (CPU cores, RAM, disks, etc.) on a single node.
 
 The tasks of a container are listed below:
@@ -53,8 +54,7 @@ The tasks of a container are listed below:
 - It grants the right to an application to use a specific amount of resources (memory, CPU, etc.) on a specific host.
 - YARN containers are particularly managed by a Container Launch context which is Container Life Cycle(CLC).This record contains a map of environment variables, dependencies stored in remotely accessible storage, security tokens, the payload for Node Manager services, and the command necessary to create the process.
 
-
-#### **Running and application through YARN**
+## **Running and application through YARN**
 
 
 ![Steps](yarnnew.svg)
@@ -62,7 +62,6 @@ The tasks of a container are listed below:
 When an application is submitted to YARN, the request goes to the Resource Manager, which then instructs a Node Manager to launch the first container for that application, known as the Application Master. The Application Master then assumes responsibility for executing and monitoring the entire job, with its specific functionality varying depending on the application framework (e.g., MapReduce Application Master functions differently than a Spark Application Master).
 
 For a MapReduce application, the Application Master requests more containers from the Resource Manager to initiate map and reduce tasks. Once these containers are allocated, the Application Master directs the Node Managers to launch the containers and execute the tasks. Tasks directly report their status and progress back to the Application Master. Upon completion of all tasks, all containers, including the Application Master, perform necessary cleanup and terminate.
-
 
 -	Application Submission: The RM accepts the application, causing the creation of an ApplicationMaster (AM) instance. The AM is responsible for negotiating resources from the RM and working with the Node Managers (NMs) to execute and monitor the tasks.
 
